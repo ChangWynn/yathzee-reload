@@ -5,7 +5,7 @@ import useDiceState from "./DiceState";
 const RoomsStateCtx = createContext(null);
 
 export const RoomsState = ({ children }) => {
-  const { setDiceRolling, reInitDice, isYahtzee } = useDiceState();
+  const { reInitDice, isYahtzee } = useDiceState();
   const [roomStates, dispatchRoomStates] = useReducer(roomStatesReducer, initialRoomStates);
 
   const [subTotalForBonus, setSubTotalForBonus] = useState(0);

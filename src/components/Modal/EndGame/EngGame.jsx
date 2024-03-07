@@ -1,8 +1,8 @@
 import useRoomsState from "../../../context/RoomsState.jsx";
 
-import { app, db } from "../../../config/firebase.js";
+import { db } from "../../../config/firebase.js";
 import { collection, addDoc } from "firebase/firestore";
-import { getAuth, signInAnonymously, signOut } from "firebase/auth";
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -64,6 +64,8 @@ const EngGame = () => {
       <form onSubmit={(e) => saveAndLeaderboard(e)}>
         <label htmlFor="">Name</label>
         <input type="text" maxLength={10} onChange={(e) => setUserName(e.target.value)} />
+        {/* TODO handle errors */}
+        {error}
         <button type="button" onClick={() => navigate("/")}>
           Back to home page
         </button>
