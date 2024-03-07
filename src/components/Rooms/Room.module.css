@@ -17,6 +17,11 @@
     font-size: 1.7rem;
   }
 
+  .room-bonus-score-left {
+    color: #2c222d;
+    font-size: 1.2rem;
+  }
+
   .room-score {
     display: flex;
     flex-direction: column;
@@ -33,7 +38,7 @@
     p {
       opacity: 0;
       font-size: 1.7rem;
-      color: #5e5e5e;
+      color: #dedede;
     }
   }
 
@@ -52,14 +57,19 @@
 
 .room.ready {
   cursor: pointer;
-  border: #835a8b 2px solid;
+  border: #c683d3 2px solid;
 
   .room-name {
-    color: #835a8b;
+    color: #c683d3;
+  }
+
+  .room-bonus-score-left {
+    color: #c683d3;
+    font-size: 1.2rem;
   }
 
   .room-score {
-    border-left-color: #835a8b;
+    border-left-color: #c683d3;
 
     p {
       opacity: 1;
@@ -67,7 +77,7 @@
   }
 
   &:disabled {
-    border: #835a8b 2px solid;
+    border: #c683d3 2px solid;
   }
 }
 
@@ -98,7 +108,7 @@
 .room.ready.locked {
   background-color: #f9dcfe;
   border-color: #f9dcfe;
-  box-shadow: 0 0 15px 2px #f580f8;
+  box-shadow: 0 0 10px 2px #f580f8;
 
   &.bonus {
     animation-name: granting-bonus;
@@ -171,17 +181,17 @@
 
   .room.ready:disabled:hover {
     cursor: default;
-    border-color: #835a8b;
+    border-color: #c683d3;
     box-shadow: unset;
     transform: unset;
 
     .room-name {
-      color: #835a8b;
+      color: #c683d3;
       text-shadow: unset;
     }
 
     .room-score {
-      border-left-color: #835a8b;
+      border-left-color: #c683d3;
       p {
         color: #5e5e5e;
       }
@@ -193,7 +203,7 @@
     box-shadow: 0 0 15px 2px #f580f8;
 
     .room-name {
-      color: #f9dcfe;
+      color: #2c222d;
       text-shadow: 0 0 9px white;
     }
 

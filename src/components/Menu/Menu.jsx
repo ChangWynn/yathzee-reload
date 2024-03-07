@@ -21,7 +21,7 @@ const Menu = () => {
 
 export default Menu;
 
-function Option({ href, OptionName }) {
+const Option = ({ href, OptionName }) => {
   const { navbarOn } = useGameFX();
   return (
     <NavLink
@@ -37,4 +37,4 @@ function Option({ href, OptionName }) {
       {OptionName}
     </NavLink>
   );
-}
+};

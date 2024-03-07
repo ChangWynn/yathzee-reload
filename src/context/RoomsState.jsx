@@ -30,7 +30,7 @@ export const RoomsState = ({ children }) => {
       numberOfRoomLocked += room.isLocked ? 1 : 0;
     }
 
-    return (!roomStates.bonus.isLocked && numberOfRoomLocked === 1) || numberOfRoomLocked === 14;
+    return (!roomStates.bonus.isLocked && numberOfRoomLocked === 13) || numberOfRoomLocked === 14;
   };
 
   // update subTotalForBonus

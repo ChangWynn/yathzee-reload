@@ -58,7 +58,9 @@ const Room = ({ roomName, resolveRoomScore, fxTiming }) => {
       >
         <span className={style["room-name"]}>{roomName}</span>
         {roomName === "bonus" && !roomStates.bonus.isLocked && (
-          <span className={style["room-name"]}>{`${63 - subTotalForBonus} points left `}</span>
+          <span className={style["room-bonus-score-left"]}>{`(${
+            63 - subTotalForBonus
+          } pts left)`}</span>
         )}
         <span className={style["room-score"]}>
           <p>
