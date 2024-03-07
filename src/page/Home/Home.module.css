@@ -1,0 +1,164 @@
+.home {
+  width: 100svw;
+  height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding-bottom: 10rem;
+
+  .home-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .home-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .home-title__letter-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 10rem;
+      height: 20rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .home-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 3rem;
+    z-index: 1;
+
+    li a {
+      color: var(--pink-text-hovered);
+      text-shadow: 0 0 10px var(--pink-text-shadow);
+      text-decoration: none;
+      font-size: 1.3rem;
+
+      &:hover {
+        color: var(--pink-text-hovered);
+        transition: all 0.1s ease-in-out;
+        animation-name: flickering-effect;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+      }
+    }
+  }
+}
+
+@keyframes blinking-effect {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.flickering {
+  animation-name: flickering-effect;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+@keyframes flickering-effect {
+  0% {
+    opacity: 0.5;
+  }
+  2% {
+    opacity: 0;
+  }
+  4% {
+    opacity: 0.5;
+  }
+  6% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.5;
+  }
+  10% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hanging {
+  transform-origin: top;
+  animation-name: hanging-effect;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes hanging-effect {
+  0% {
+    transform: rotate(4deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+@media (max-width: 468px) {
+  .home {
+    .home-title {
+      .home-title__letter-container {
+        width: 4rem;
+        height: 8rem;
+      }
+    }
+
+    .home-menu {
+      gap: 2rem;
+    }
+  }
+}
+
+@media (min-width: 468px) and (max-width: 768px) {
+  .home {
+    .home-title {
+      .home-title__letter-container {
+        width: 6rem;
+        height: 12rem;
+      }
+    }
+
+    .home-menu {
+      gap: 2rem;
+    }
+  }
+}

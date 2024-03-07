@@ -1,0 +1,108 @@
+:root {
+  --pink-text-off: #2c222d;
+  --pink-text-on: #835a8b;
+  --pink-text-hovered: #f9dcfe;
+  --pink-text-powered: #e885e9;
+  --pink-text-shadow: white;
+
+  --game-header-pink-text-off: #2c222d;
+  --game-header-pink-text-dim: #f9dcfe;
+  --game-header-pink-text-on: #f0befa;
+  --game-header-pink-text-powered: #e885e9;
+
+  --game-container-pink-border-off: #2c222d;
+  --game-container-pink-border-on: #e885e9;
+  --game-container-pink-shadow-on: #f580f8;
+
+  --dice-container-pink-border-off: #2c222d;
+  --dice-container-pink-border-dim: #835a8b;
+  --dice-container-pink-border-on: #e885e9;
+  --dice-container-pink-shadow-on: #f580f8;
+
+  --dice-pink-border-off: #2c222d;
+  --dice-pink-border-on: #f0befa;
+  --dice-pink-background-off: #3b2a3d;
+  --dice-pink-background-on: #e885e9;
+  --dice-pink-shadow: #f580f8;
+
+  --roll-button-pink-text-off: #2c222d;
+  --roll-button-pink-text-on: #f0befa;
+  --roll-button-pink-border-off: #2c222d;
+  --roll-button-pink-border-on: #f0befa;
+  --roll-button-pink-background-off: #3b2a3d;
+  --roll-button-pink-background-on: #f580f8;
+  --roll-button-pink-shadow: #f580f8;
+
+  --dot-pink-border-off: #2c222d;
+  --dot-pink-border-on: #f0befa;
+  --dot-pink-background-on: #2c222d;
+  --dot-pink-background-on: #f580f8;
+  --dot-pink-shadow: #f580f8;
+
+  --room-pink-text-off: #2c222d;
+  --room-pink-text-on: #f0befa;
+  --room-pink-border-off: #2c222d;
+  --room-pink-border-on: #835a8b;
+  --room-pink-background-off: #3b2a3d;
+  --room-pink-background-on: #f580f8;
+  --room-pink-shadow: #f580f8;
+
+  --alternative-font: "Tilt Neon", cursive;
+
+  --background-overlay: rgba(17, 0, 18, 0.8);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.8;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-family: "Press Start 2P", cursive;
+  user-select: none;
+  height: 100svh;
+  width: 100svw;
+  background: url(./assets/background/desktop/background-2.jpg) no-repeat center center/cover;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--background-overlay);
+  z-index: -1;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  *:hover {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background: url(./assets/background/mobile/background-2.jpg) no-repeat center center/cover;
+  }
+}

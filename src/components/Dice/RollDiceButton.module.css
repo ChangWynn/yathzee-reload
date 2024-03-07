@@ -1,0 +1,99 @@
+.roll-button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 10%;
+}
+
+.roll-button {
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 900;
+  font-family: "Tilt Neon", cursive;
+
+  width: 50%;
+  height: 100%;
+  transform: scale(1);
+  border: transparent 4px solid;
+  border-radius: 20px;
+
+  border: var(--roll-button-pink-border-off) 5px solid;
+  color: var(--roll-button-pink-text-off);
+  background-color: var(--roll-button-pink-background-on);
+
+  flex-grow: 0;
+
+  box-shadow: 0 0 0 0 var(--roll-button-pink-shadow);
+  transition: all 0.1s ease;
+}
+
+.roll-button.enabled {
+  animation-name: boot-up-effect;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-delay: 0s;
+  animation-direction: normal;
+  animation-timing-function: linear;
+}
+
+.roll-button:active {
+  box-shadow: 0 0 5px 0 var(--roll-button-pink-shadow);
+  transform: scale(0.9);
+}
+
+.roll-button.disabled {
+  transform: unset;
+  cursor: default;
+  background-color: var(--roll-button-pink-background-off);
+}
+
+.roll-button.disabled:active {
+  position: relative;
+  border: var(--roll-button-pink-border-off) 5px solid;
+  color: var(--roll-button-pink-text-off);
+  box-shadow: unset;
+  transform: unset;
+}
+
+@keyframes boot-up-effect {
+  0% {
+    border: var(--roll-button-pink-border-off) 5px solid;
+    box-shadow: 0 0 10px 2px var(--roll-button-pink-shadow);
+  }
+  50% {
+    border: var(--roll-button-pink-border-on) 5px solid;
+    box-shadow: 0 0 20px 10px var(--roll-button-pink-shadow);
+  }
+  100% {
+    border: var(--roll-button-pink-border-off) 5px solid;
+    box-shadow: 0 0 10px 2px var(--roll-button-pink-shadow);
+  }
+}
+
+@media (hover: hover) {
+  .roll-button:hover {
+    position: relative;
+    border: var(--roll-button-pink-border-on) 5px solid;
+    color: var(--roll-button-pink-text-on);
+    box-shadow: 0 0 10px 2px var(--roll-button-pink-shadow);
+  }
+
+  .roll-button.disabled:hover {
+    position: relative;
+    border: var(--roll-button-pink-border-off) 5px solid;
+    color: var(--roll-button-pink-text-off);
+    box-shadow: unset;
+    transition: all 0.1s ease;
+  }
+}
+
+@media (max-width: 480px) {
+  .roll-button:active {
+    border: var(--roll-button-pink-border-on) 5px solid;
+    color: var(--roll-button-pink-text-on);
+    box-shadow: 0 0 5px 0 var(--roll-button-pink-shadow);
+  }
+}
