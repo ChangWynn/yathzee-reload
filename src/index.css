@@ -1,4 +1,8 @@
 :root {
+  --primary-color-on: #e885e9;
+  --primary-color-on-light: #f9dcfe;
+  --primary-color-off: #2c222d;
+
   --pink-text-off: #2c222d;
   --pink-text-on: #835a8b;
   --pink-text-hovered: #f9dcfe;
@@ -15,8 +19,8 @@
   --game-container-pink-shadow-on: #f580f8;
 
   --dice-container-pink-border-off: #2c222d;
-  --dice-container-pink-border-dim: #835a8b;
-  --dice-container-pink-border-on: #e885e9;
+  --dice-container-pink-border-dim: #c683d3;
+  --dice-container-pink-border-on: #f0befa; /* e885e9 */
   --dice-container-pink-shadow-on: #f580f8;
 
   --dice-pink-border-off: #2c222d;

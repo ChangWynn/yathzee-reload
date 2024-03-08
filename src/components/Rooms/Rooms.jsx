@@ -4,6 +4,7 @@ import Room from "./Room";
 import style from "./Rooms.module.css";
 import useGameSoundFX from "../../context/GameSoundFX";
 import useDiceState from "../../context/DiceState";
+import { getStyles } from "../../utils/functions/get-styles";
 
 const Rooms = () => {
   const { subTotalForBonus, roomStates, dispatchRoomStates } = useRoomsState();
@@ -107,28 +108,37 @@ const Rooms = () => {
       </RoomsHalf>
       <RoomsHalf>
         <Room
+          reversed
           roomName="threeOfAKind"
           resolveRoomScore={() => resolveThreeOrFourOfAKindScore(3)}
           fxTiming={800}
         />
         <Room
+          reversed
           roomName="fourOfAKind"
           resolveRoomScore={() => resolveThreeOrFourOfAKindScore(4)}
           fxTiming={700}
         />
-        <Room roomName="fullHouse" resolveRoomScore={resolveFullHouseScore} fxTiming={600} />
         <Room
+          reversed
+          roomName="fullHouse"
+          resolveRoomScore={resolveFullHouseScore}
+          fxTiming={600}
+        />
+        <Room
+          reversed
           roomName="smallStraight"
           resolveRoomScore={() => resolveStraightScore(4)}
           fxTiming={500}
         />
         <Room
+          reversed
           roomName="largeStraight"
           resolveRoomScore={() => resolveStraightScore(5)}
           fxTiming={400}
         />
-        <Room roomName="yahtzee" resolveRoomScore={resolveYahtzeeScore} fxTiming={300} />
-        <Room roomName="chance" resolveRoomScore={resolveChanceScore} fxTiming={200} />
+        <Room reversed roomName="yahtzee" resolveRoomScore={resolveYahtzeeScore} fxTiming={300} />
+        <Room reversed roomName="chance" resolveRoomScore={resolveChanceScore} fxTiming={200} />
       </RoomsHalf>
     </div>
   );

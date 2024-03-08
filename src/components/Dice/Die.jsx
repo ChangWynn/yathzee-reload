@@ -3,8 +3,10 @@ import useGameFX from "../../context/GameFX";
 import useGameSoundFX from "../../context/GameSoundFX";
 import { getStyles } from "../../utils/functions/get-styles";
 import useDiceState from "../../context/DiceState";
+import useSettings from "../../context/Settings";
 
 const Die = ({ index, die }) => {
+  const { initFxOn } = useSettings();
   const { diceOn, isRollBtnHovered } = useGameFX();
   const { playLockDieSFX } = useGameSoundFX();
   const { dice, setDice, rollCount } = useDiceState();
@@ -31,7 +33,7 @@ const Die = ({ index, die }) => {
       onClick={toggleLock}
     >
       <img
-        className={style[diceOn ? "shown" : "hidden"]}
+        className={style[!initFxOn || diceOn ? "shown" : "hidden"]}
         src={require(`../../assets/dice/dice-${die.value}.png`)}
         alt={`dice number ${die.value}`}
       />

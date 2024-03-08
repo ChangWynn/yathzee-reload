@@ -7,11 +7,13 @@ import useGameSoundFX from "../../context/GameSoundFX";
 import { ACTION } from "../../reducers/room-states";
 import useRoomScore from "../../hooks/use-room-score";
 import useDiceState from "../../context/DiceState";
+import useSettings from "../../context/Settings";
 
-const Room = ({ roomName, resolveRoomScore, fxTiming }) => {
+const Room = ({ roomName, resolveRoomScore, fxTiming, reversed = false }) => {
   const [roomFxOn, setRoomFxOn] = useState(false);
 
-  const { init, gameIsReady } = useGameFX();
+  const { initFxOn } = useSettings();
+  const { init } = useGameFX();
   const { playLockRoomCategorySFX } = useGameSoundFX();
   const { roomStates, dispatchRoomStates, subTotalForBonus } = useRoomsState();
   const { isYahtzee, setIsYahtzee, resetDice, resetRollCount, isRollZero, diceRolling } =
@@ -20,6 +22,8 @@ const Room = ({ roomName, resolveRoomScore, fxTiming }) => {
   const roomState = roomStates[roomName];
   const roomScore = useRoomScore(roomName, resolveRoomScore);
   const isRoomBonus = roomState.name === "bonus";
+
+  const isDisabled = useIsDisabled({ isRoomBonus, roomState });
 
   useEffect(() => {
     if (init) {
@@ -47,11 +51,13 @@ const Room = ({ roomName, resolveRoomScore, fxTiming }) => {
     return (
       <button
         onClick={lockRoom}
-        disabled={!gameIsReady || diceRolling || isRoomBonus || isRollZero || roomState.isLocked}
+        disabled={isDisabled}
         className={getStyles([
           style["room"],
           style[roomName],
-          style[roomFxOn ? "ready" : "not-ready"],
+          style[reversed && "reversed"],
+          style[initFxOn && "init-state"],
+          style[!initFxOn || roomFxOn ? "ready" : "not-ready"],
           style[roomState.isLocked && "locked"],
           style[!isRoomBonus && !roomState.isLocked && roomScore > 0 && !isRollZero && "potential"],
         ])}
@@ -77,3 +83,15 @@ const Room = ({ roomName, resolveRoomScore, fxTiming }) => {
 };
 
 export default Room;
+
+const useIsDisabled = ({ roomState, isRoomBonus }) => {
+  const { initFxOn } = useSettings();
+  const { diceRolling, isRollZero } = useDiceState();
+  const { gameIsReady } = useGameFX();
+
+  if (initFxOn) {
+    return !gameIsReady || diceRolling || isRoomBonus || isRollZero || roomState.isLocked;
+  } else {
+    return diceRolling || isRoomBonus || isRollZero || roomState.isLocked;
+  }
+};

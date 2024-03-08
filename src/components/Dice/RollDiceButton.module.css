@@ -73,6 +73,8 @@
   }
 }
 
+/* MEDIA QUERIES */
+
 @media (hover: hover) {
   .roll-button:hover {
     position: relative;

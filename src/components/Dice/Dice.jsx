@@ -4,8 +4,10 @@ import useGameFX from "../../context/GameFX";
 import Die from "./Die";
 import { getStyles } from "../../utils/functions/get-styles";
 import useDiceState from "../../context/DiceState";
+import useSettings from "../../context/Settings";
 
 const Dice = () => {
+  const { initFxOn } = useSettings();
   const { diceContainerOn, isRollBtnHovered } = useGameFX();
   const { dice, diceRolling } = useDiceState();
 
@@ -13,6 +15,7 @@ const Dice = () => {
     <div
       className={getStyles([
         style["dice-container"],
+        style[initFxOn && "init-state"],
         style[diceContainerOn && "active"],
         style[diceRolling && "rolling"],
         style[isRollBtnHovered && "hovered"],

@@ -8,22 +8,25 @@ import { GameFX } from "./context/GameFX";
 import { GameSoundFX } from "./context/GameSoundFX";
 
 import { Routes, Route } from "react-router-dom";
+import { Settings } from "./context/Settings";
 
 const App = () => {
   return (
-    <DiceState>
-      <RoomsState>
-        <GameFX>
-          <GameSoundFX>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/game" element={<Game />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
-            </Routes>
-          </GameSoundFX>
-        </GameFX>
-      </RoomsState>
-    </DiceState>
+    <Settings>
+      <DiceState>
+        <RoomsState>
+          <GameFX>
+            <GameSoundFX>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/game" element={<Game />} />
+                <Route path="/leaderboard" element={<Leaderboard />} />
+              </Routes>
+            </GameSoundFX>
+          </GameFX>
+        </RoomsState>
+      </DiceState>
+    </Settings>
   );
 };
 

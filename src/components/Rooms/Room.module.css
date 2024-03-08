@@ -1,4 +1,6 @@
 .room {
+  cursor: pointer;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -6,19 +8,30 @@
   width: 100%;
   height: 14%;
 
+  border: #c683d3 2px solid;
   border-radius: 10px;
   background-color: #111;
 
   font-family: var(--alternative-font);
   transition: all 0.1s ease-in-out;
 
+  &.reversed {
+    flex-direction: row-reverse;
+
+    .room-score {
+      border-radius: 8px 0 0 8px;
+      border-right: #c683d3 1px solid;
+      border-left: none;
+    }
+  }
+
   .room-name {
-    color: #2c222d;
+    color: #c683d3;
     font-size: 1.7rem;
   }
 
   .room-bonus-score-left {
-    color: #2c222d;
+    color: #c683d3;
     font-size: 1.2rem;
   }
 
@@ -33,55 +46,83 @@
     text-align: center;
     background-color: black;
     border-radius: 0 8px 8px 0;
-    border-left: #2c222d 1px solid;
+    border-left: #c683d3 1px solid;
 
     p {
-      opacity: 0;
+      opacity: 1;
       font-size: 1.7rem;
       color: #dedede;
     }
   }
+}
 
-  &.reverse {
-    flex-direction: row-reverse;
+.room.init-state {
+  cursor: default;
+
+  .room-name {
+    color: #2c222d;
+  }
+
+  .room-bonus-score-left {
+    color: #2c222d;
+  }
+
+  .room-score {
+    background-color: black;
+
+    p {
+      opacity: 0;
+      color: #dedede;
+    }
   }
 }
 
 .room.not-ready {
   border: #2c222d 2px solid;
 
-  &:active {
-    border-color: #2c222d;
+  .room-score {
+    border-left: #2c222d 1px solid;
+    border-right: #2c222d 1px solid;
   }
 }
 
 .room.ready {
-  cursor: pointer;
-  border: #c683d3 2px solid;
-
   .room-name {
     color: #c683d3;
   }
 
-  .room-bonus-score-left {
-    color: #c683d3;
-    font-size: 1.2rem;
-  }
-
   .room-score {
-    border-left-color: #c683d3;
-
     p {
       opacity: 1;
     }
   }
 
   &:disabled {
-    border: #c683d3 2px solid;
+    border: #3b2a3d 2px solid;
+
+    .room-name {
+      color: #3b2a3d;
+    }
+
+    .room-bonus-score-left {
+      color: #3b2a3d;
+    }
+
+    .room-score {
+      border-left-color: #3b2a3d;
+      border-right-color: #3b2a3d;
+
+      p {
+        opacity: 1;
+        color: #444444;
+      }
+    }
   }
 }
 
 .room.ready.potential {
+  border: #f9dcfe 2px solid;
+
   .room-name {
     font-weight: 600;
     color: #f9dcfe;
@@ -89,6 +130,9 @@
   }
 
   .room-score {
+    border-left-color: #f9dcfe;
+    border-right-color: #f9dcfe;
+
     p {
       font-weight: 600;
       color: #dedede;
@@ -96,11 +140,25 @@
   }
 
   &:disabled {
-    border-color: #f9dcfe;
-    box-shadow: 0 0 10px 1px #f580f8;
+    border: #3b2a3d 2px solid;
+
+    .room-name {
+      color: #3b2a3d;
+      text-shadow: none;
+    }
+
+    .room-bonus-score-left {
+      color: #3b2a3d;
+    }
 
     .room-score {
-      border-left-color: #f9dcfe;
+      border-left-color: #3b2a3d;
+      border-right-color: #3b2a3d;
+
+      p {
+        opacity: 1;
+        color: #444444;
+      }
     }
   }
 }
@@ -151,11 +209,12 @@
   }
 }
 
+/* MEDIA QUERIES */
+
 @media (hover: hover) {
   .room.ready:hover:active {
     border-color: #f9dcfe;
     box-shadow: 0 0 20px 10px #f580f8;
-    transform: scale(1.2);
   }
 
   .room.ready:hover {
@@ -181,19 +240,21 @@
 
   .room.ready:disabled:hover {
     cursor: default;
-    border-color: #c683d3;
+    border-color: #3b2a3d;
     box-shadow: unset;
     transform: unset;
 
     .room-name {
-      color: #c683d3;
+      color: #3b2a3d;
       text-shadow: unset;
     }
 
     .room-score {
-      border-left-color: #c683d3;
+      border-left-color: #3b2a3d;
+      border-right-color: #3b2a3d;
       p {
-        color: #5e5e5e;
+        color: #dedede;
+        color: #444444;
       }
     }
   }
@@ -209,6 +270,7 @@
 
     .room-score {
       border-left-color: #f9dcfe;
+
       p {
         color: #dedede;
       }

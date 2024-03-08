@@ -66,16 +66,6 @@ const Leaderboard = () => {
             })} */}
         </div>
       </div>
-      {/* <div className={style["save-popup"]}>
-        {props.showSavePopUp && (
-          <FirstPopUp
-            markAsSaved={markAsSaved}
-            endScore={props.endScore}
-            saveScore={saveScore}
-            savingData={props.savingData}
-          />
-        )}
-      </div> */}
     </PageContainer>
   );
 };

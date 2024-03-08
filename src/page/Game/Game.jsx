@@ -14,13 +14,17 @@ import PageContainer from "../PageContainer";
 import { useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import { BackButton, RestartButton, SettingsButton } from "../../components/Navbar/Buttons";
+import useSettings from "../../context/Settings";
 
 const Game = () => {
   const { setInit, dashboardOn, yahtzeeFxOn } = useGameFX();
+  const { initFxOn } = useSettings();
 
   useEffect(() => {
-    setInit(true);
-  }, []);
+    if (initFxOn) {
+      setInit(true);
+    }
+  }, [initFxOn, setInit]);
 
   return (
     <PageContainer id="game">
@@ -32,7 +36,8 @@ const Game = () => {
       <div
         className={getStyles([
           style["game-container"],
-          style[dashboardOn && "active"],
+          style[initFxOn && "init-state"],
+          style[dashboardOn && "activated"],
           style[yahtzeeFxOn && "yahtzee-celebration"],
         ])}
       >

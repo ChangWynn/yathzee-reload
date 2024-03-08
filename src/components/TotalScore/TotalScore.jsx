@@ -1,5 +1,6 @@
 import useGameFX from "../../context/GameFX";
 import useRoomsState from "../../context/RoomsState";
+import useSettings from "../../context/Settings";
 import { getStyles } from "../../utils/functions/get-styles";
 import style from "./TotalScore.module.css";
 
@@ -32,6 +33,7 @@ const ScoreDecoration = () => {
 };
 
 const Score = () => {
+  const { initFxOn } = useSettings();
   const { totalScoreOn } = useGameFX();
   const { totalScore, totalHasUpdated } = useRoomsState();
 
@@ -39,8 +41,8 @@ const Score = () => {
     <strong
       className={getStyles([
         style["score-total"],
-        style[totalScoreOn && "active"],
-        style[totalScoreOn && totalHasUpdated && "on-update"],
+        style[(!initFxOn || totalScoreOn) && "active"],
+        style[(totalScoreOn || !initFxOn) && totalHasUpdated && "on-update"],
       ])}
     >
       {totalScore}

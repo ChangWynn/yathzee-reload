@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import useDiceState from "./DiceState";
+import useSettings from "./Settings";
 
 const GameFxCtx = createContext(null);
 
 export const GameFX = ({ children }) => {
   const { isYahtzee } = useDiceState();
+  const { initFxOn } = useSettings();
 
   const [init, setInit] = useState(false);
   const [dashboardOn, setDashboardOn] = useState(false);
@@ -25,7 +27,7 @@ export const GameFX = ({ children }) => {
   const [yahtzeeFxOn, setYahtzeeFxOn] = useState(false);
 
   useEffect(() => {
-    if (init) {
+    if (initFxOn && init) {
       launchEffect(setDashboardOn, 1200);
       launchEffect(setTitleOn, 2400);
       launchEffect(setNavbarOn, 1200);
@@ -39,7 +41,7 @@ export const GameFX = ({ children }) => {
     }
 
     return shutDownAllEffects;
-  }, [init]);
+  }, [initFxOn, init]);
 
   useEffect(() => {
     let yahtzeeTimeout;

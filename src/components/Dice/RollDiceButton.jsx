@@ -4,13 +4,14 @@ import useGameFX from "../../context/GameFX";
 import useGameSoundFX from "../../context/GameSoundFX";
 import { getStyles } from "../../utils/functions/get-styles";
 import useDiceState from "../../context/DiceState";
+import useSettings from "../../context/Settings";
 
 const RollDiceButton = () => {
-  const { rollButtonOn, setIsRollBtnHovered } = useGameFX();
+  const { setIsRollBtnHovered } = useGameFX();
   const { playDiceRollSFX } = useGameSoundFX();
-  const { getNewDice, isYahtzee, rollCount, diceRolling, setDiceRolling } = useDiceState();
+  const { getNewDice, setDiceRolling } = useDiceState();
 
-  const isDisabled = !rollButtonOn || diceRolling || rollCount === 3 || isYahtzee;
+  const isDisabled = useIsDisabled();
 
   const switchRollBtnHoverFX = {
     on: () => setIsRollBtnHovered(true),
@@ -45,3 +46,15 @@ const RollDiceButton = () => {
 };
 
 export default RollDiceButton;
+
+const useIsDisabled = () => {
+  const { initFxOn } = useSettings();
+  const { isYahtzee, rollCount, diceRolling } = useDiceState();
+  const { rollButtonOn } = useGameFX();
+
+  if (initFxOn) {
+    return !rollButtonOn || diceRolling || rollCount === 3 || isYahtzee;
+  } else {
+    return diceRolling || rollCount === 3 || isYahtzee;
+  }
+};
