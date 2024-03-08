@@ -25,7 +25,7 @@ const ScoreDecoration = () => {
       className={getStyles([
         style["score-decoration"],
         style[(scoreDecorationOn || isRollBtnHovered) && "normal-lights-up"],
-        style[totalHasUpdated && "quick-lights-up"],
+        style[scoreDecorationOn && totalHasUpdated && "quick-lights-up"],
       ])}
     />
   );
@@ -40,7 +40,7 @@ const Score = () => {
       className={getStyles([
         style["score-total"],
         style[totalScoreOn && "active"],
-        style[totalHasUpdated && "on-update"],
+        style[totalScoreOn && totalHasUpdated && "on-update"],
       ])}
     >
       {totalScore}

@@ -22,11 +22,11 @@ const Room = ({ roomName, resolveRoomScore, fxTiming }) => {
   const isRoomBonus = roomState.name === "bonus";
 
   useEffect(() => {
-    const roomFxTimeout = setTimeout(() => {
-      setRoomFxOn(true);
-    }, fxTiming);
-
-    return () => clearTimeout(roomFxTimeout);
+    if (init) {
+      setTimeout(() => {
+        setRoomFxOn(true);
+      }, fxTiming);
+    }
   }, [init, fxTiming]);
 
   const lockRoom = () => {

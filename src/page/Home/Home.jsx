@@ -1,4 +1,5 @@
 import { getStyles } from "../../utils/functions/get-styles";
+
 import style from "./Home.module.css";
 
 const Home = () => {
@@ -23,7 +24,7 @@ const Home = () => {
       </div>
       <ul className={style["home-menu"]}>
         <li>
-          <a href="/game">Arcade Mode</a>
+          <a href="/game">Play</a>
         </li>
         <li>
           <a href="/leaderboard">Leaderboard</a>

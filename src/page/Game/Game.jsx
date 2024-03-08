@@ -11,13 +11,24 @@ import Dots from "../../components/Dots/Dots";
 import TotalScore from "../../components/TotalScore/TotalScore";
 import EndGame from "../../components/Modal/EndGame/EngGame";
 import PageContainer from "../PageContainer";
+import { useEffect } from "react";
+import Navbar from "../../components/Navbar/Navbar";
+import { BackButton, RestartButton, SettingsButton } from "../../components/Navbar/Buttons";
 
 const Game = () => {
-  const { dashboardOn, yahtzeeFxOn } = useGameFX();
+  const { setInit, dashboardOn, yahtzeeFxOn } = useGameFX();
+
+  useEffect(() => {
+    setInit(true);
+  }, []);
 
   return (
     <PageContainer id="game">
-      <Menu />
+      <Navbar>
+        <BackButton />
+        {/* <SettingsButton />
+        <RestartButton /> */}
+      </Navbar>
       <div
         className={getStyles([
           style["game-container"],

@@ -4,7 +4,8 @@ import style from "./Leaderboard.module.css";
 
 import { db } from "../../config/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
-import Menu from "../../components/Menu/Menu";
+import Navbar from "../../components/Navbar/Navbar";
+import { BackButton, PlayButton, SettingsButton } from "../../components/Navbar/Buttons";
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -32,28 +33,11 @@ const Leaderboard = () => {
 
   return (
     <PageContainer id="leaderboard">
-      <div className={style["leaderboard__page-title"]}>
-        <Menu />
-        <h1>LEADERBOARD</h1>
-        {/*
-        <ul className={style["navbar-container"]}>
-          <li>
-            <a onClick={homeRedirect} className={style["navbar-link"]}>
-              Home
-            </a>
-          </li>
-          <li>
-            <a onClick={playRedirect} className={style["navbar-link"]}>
-              Play
-            </a>
-          </li>
-          <li>
-            <a className={style["navbar-link"]} href="/multiplayer">
-              Multiplayer(BETA)
-            </a>
-          </li>
-        </ul> */}
-      </div>
+      <Navbar>
+        <BackButton />
+        {/* <SettingsButton /> */}
+        <PlayButton />
+      </Navbar>
       <div className={style["leaderboard__container"]}>
         <div className={style["leaderboard__inner-container"]}>
           <table className={style["leaderboard__table"]}>

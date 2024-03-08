@@ -25,20 +25,21 @@ export const GameFX = ({ children }) => {
   const [yahtzeeFxOn, setYahtzeeFxOn] = useState(false);
 
   useEffect(() => {
-    setInit(true);
-    launchEffect(setDashboardOn, 1200);
-    launchEffect(setTitleOn, 2400);
-    launchEffect(setNavbarOn, 1200);
-    launchEffect(setDiceContainer, 1800);
-    launchEffect(setRollButtonOn, 2400);
-    launchEffect(setDiceOn, 2000);
-    launchEffect(setGameIsReady, 3000);
-    launchEffect(setScoreDecorationOn);
-    stopEffect(setScoreDecorationOn, 1400);
-    launchEffect(setTotalScoreOn, 1200);
+    if (init) {
+      launchEffect(setDashboardOn, 1200);
+      launchEffect(setTitleOn, 2400);
+      launchEffect(setNavbarOn, 1200);
+      launchEffect(setDiceContainer, 1800);
+      launchEffect(setRollButtonOn, 2400);
+      launchEffect(setDiceOn, 2000);
+      launchEffect(setGameIsReady, 3000);
+      launchEffect(setScoreDecorationOn);
+      stopEffect(setScoreDecorationOn, 1400);
+      launchEffect(setTotalScoreOn, 1200);
+    }
 
     return shutDownAllEffects;
-  }, []);
+  }, [init]);
 
   useEffect(() => {
     let yahtzeeTimeout;
@@ -83,6 +84,7 @@ export const GameFX = ({ children }) => {
     <GameFxCtx.Provider
       value={{
         init,
+        setInit,
         gameIsReady,
         dashboardOn,
         titleOn,
