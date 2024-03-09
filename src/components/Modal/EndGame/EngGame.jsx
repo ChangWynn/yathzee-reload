@@ -9,11 +9,13 @@ import { useNavigate } from "react-router-dom";
 
 import style from "./EndGame.module.css";
 import Modal from "../ReactModal.jsx";
+import TotalScore from "../../TotalScore/TotalScore.jsx";
+import ModalButton from "../ModalButton.jsx";
 
 const EngGame = () => {
   const navigate = useNavigate();
   const { totalScore, isEndGame } = useRoomsState();
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
 
   const [anonymousUserCredentials, setAnonymousUserCredentials] = useState(null);
   const [error, setError] = useState(null);
@@ -34,7 +36,7 @@ const EngGame = () => {
   const saveScore = async () => {
     try {
       await addDoc(collection(db, "leaderboard"), {
-        name: userName,
+        name: username,
         score: +totalScore,
         uid: anonymousUserCredentials.user.uid,
       });
@@ -59,25 +61,42 @@ const EngGame = () => {
   };
 
   return (
-    <Modal isOpen={isEndGame} onClose={refreshPage} contentAriaLabel={"End Game Modal Window"}>
-      <strong className={style["total-score"]}>{totalScore}</strong>
-      <form onSubmit={(e) => saveAndLeaderboard(e)}>
-        <label htmlFor="">Name</label>
-        <input type="text" maxLength={10} onChange={(e) => setUserName(e.target.value)} />
-        {/* TODO handle errors */}
-        {error}
-        <button type="button" onClick={() => navigate("/")}>
-          Back to home page
-        </button>
-        <button type="button" onClick={refreshPage}>
-          Replay without saving
-        </button>
-        <button type="button" onClick={saveAndReplay} disabled={!anonymousUserCredentials}>
-          Save and replay
-        </button>
-        <button type="submit" disabled={!anonymousUserCredentials}>
-          Save and see leaderboard
-        </button>
+    <Modal
+      isOpen={isEndGame}
+      onClose={refreshPage}
+      height={"325px"}
+      contentAriaLabel={"End Game Modal Window"}
+    >
+      {/* <strong className={style["total-score"]}>{totalScore}</strong> */}
+      <form onSubmit={(e) => saveAndLeaderboard(e)} className={style["end-game-modal"]}>
+        <div className={style["end-game-modal--header-container"]}>
+          <h1 className={style["header"]}>Save Score ?</h1>
+          <TotalScore />
+        </div>
+        <div className={style["end-game-modal--form-container"]}>
+          <div className={style["end-game-modal--input-container"]}>
+            <p className={style["input-helper"]}>Make it special!</p>
+            <input
+              type="text"
+              id="player-name"
+              name="player-name"
+              placeholder="Choose a username"
+              maxLength={15}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            {/* <p className={style["error"]}>error</p> */}
+            {/* <p className={getStyles([style["error"], style[!error && "hidden"]])}>{error}</p> */}
+          </div>
+          <div className={style["end-game-modal--button-container"]}>
+            <ModalButton text="Replay" onClickFn={refreshPage} />
+            <ModalButton
+              text="Save"
+              type="submit"
+              isDisabled={!anonymousUserCredentials || !username}
+              main
+            />
+          </div>
+        </div>
       </form>
     </Modal>
   );

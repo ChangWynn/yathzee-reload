@@ -2,19 +2,20 @@ import ReactModal from "react-modal";
 
 // import modalStyle from "./ReactModal.style.js";
 
-const Modal = ({ isOpen, onClose, contentAriaLabel, children }) => {
+const Modal = ({ isOpen, onClose, height, contentAriaLabel, children }) => {
   return (
     <ReactModal
       isOpen={isOpen}
       style={{
-        overlay: { backgroundColor: "#000000e6" },
+        overlay: { backgroundColor: "#000000ed" },
         content: {
           backgroundColor: "#111",
           border: "#e885e9 1px solid",
           color: "white",
-          maxWidth: "900px",
-          maxHeight: "500px",
+          maxWidth: "500px",
+          height,
           margin: "auto",
+          padding: "5px 10px",
         },
       }}
       shouldCloseOnOverlayClick={true}

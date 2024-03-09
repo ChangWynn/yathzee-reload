@@ -22,7 +22,7 @@ export default TotalScore;
 const ScoreDecoration = () => {
   const { initFxOn } = useSettings();
   const { scoreDecorationOn, isRollBtnHovered } = useGameFX();
-  const { totalHasUpdated } = useRoomsState();
+  const { totalHasUpdated, isEndGame } = useRoomsState();
   const { diceRolling } = useDiceState();
 
   return (
@@ -30,7 +30,8 @@ const ScoreDecoration = () => {
       className={getStyles([
         style["score-decoration"],
         style[
-          ((initFxOn && scoreDecorationOn) || isRollBtnHovered || diceRolling) && "normal-lights-up"
+          ((initFxOn && scoreDecorationOn) || isRollBtnHovered || diceRolling || isEndGame) &&
+            "normal-lights-up"
         ],
         style[((initFxOn && scoreDecorationOn) || totalHasUpdated) && "quick-lights-up"],
       ])}

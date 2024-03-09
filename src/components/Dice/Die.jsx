@@ -4,6 +4,7 @@ import useGameSoundFX from "../../context/GameSoundFX";
 import { getStyles } from "../../utils/functions/get-styles";
 import useDiceState from "../../context/DiceState";
 import useSettings from "../../context/Settings";
+import { assets } from "../../assets/assets";
 
 const Die = ({ index, die }) => {
   const { initFxOn } = useSettings();
@@ -34,7 +35,7 @@ const Die = ({ index, die }) => {
     >
       <img
         className={style[!initFxOn || diceOn ? "shown" : "hidden"]}
-        src={require(`../../assets/dice/dice-${die.value}.png`)}
+        src={assets.dice[die.value]}
         alt={`dice number ${die.value}`}
       />
     </div>
