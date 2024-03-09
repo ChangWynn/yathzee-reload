@@ -5,6 +5,7 @@ import useGameSoundFX from "../../context/GameSoundFX";
 import { getStyles } from "../../utils/functions/get-styles";
 import useDiceState from "../../context/DiceState";
 import useSettings from "../../context/Settings";
+import Dots from "../Dots/Dots";
 
 const RollDiceButton = () => {
   const { setIsRollBtnHovered } = useGameFX();
@@ -41,6 +42,7 @@ const RollDiceButton = () => {
         >
           ROLL
         </button>
+        <Dots />
       </div>
     </>
   );

@@ -4,22 +4,29 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
+
   width: 100%;
   height: 15%;
-  gap: 1rem;
+  padding: 0 1rem;
   overflow: hidden;
-  border: var(--dice-container-pink-border-dim) 4px solid;
-  border-radius: 15px;
+
+  border-top: var(--dice-container-pink-border-dim) 1px solid;
+  border-bottom: var(--dice-container-pink-border-dim) 1px solid;
   transition: all 0.2s ease;
 }
 
 .dice-container.init-state {
-  border: var(--dice-container-pink-border-off) 4px solid;
+  border-top: var(--dice-container-pink-border-off) 1px solid;
+  border-bottom: var(--dice-container-pink-border-off) 1px solid;
+
   &.active {
-    border: var(--dice-container-pink-border-dim) 4px solid;
+    border-top: var(--dice-container-pink-border-dim) 1px solid;
+    border-bottom: var(--dice-container-pink-border-dim) 1px solid;
 
     &.rolling {
-      border: var(--dice-container-pink-border-on) 4px solid;
+      border-top: var(--dice-container-pink-border-on) 3px solid;
+      border-bottom: var(--dice-container-pink-border-on) 3px solid;
       box-shadow: 0 0 10px 1px var(--dice-container-pink-shadow-on);
     }
   }
@@ -29,11 +36,14 @@
 
 @media (hover: hover) {
   .dice-container.hovered {
-    border: var(--dice-container-pink-border-on) 4px solid;
+    border-top: var(--dice-container-pink-border-on) 3px solid;
+    border-bottom: var(--dice-container-pink-border-on) 3px solid;
     box-shadow: 0 0 10px 1px var(--dice-container-pink-shadow-on);
   }
-  .dice-container.init-state.active.hovered {
-    border: var(--dice-container-pink-border-on) 4px solid;
+
+  .dice-container.active.hovered {
+    border-top: var(--dice-container-pink-border-on) 3px solid;
+    border-bottom: var(--dice-container-pink-border-on) 3px solid;
     box-shadow: 0 0 10px 1px var(--dice-container-pink-shadow-on);
   }
 }
