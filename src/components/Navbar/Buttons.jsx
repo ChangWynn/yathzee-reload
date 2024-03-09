@@ -1,5 +1,6 @@
 import NavbarButton from "./NavbarButton";
 import useRedirect from "../../hooks/use-redirect";
+import useSettings from "../../context/Settings";
 
 export const BackButton = () => {
   const backHome = useRedirect("/");
@@ -8,9 +9,16 @@ export const BackButton = () => {
 };
 
 export const SettingsButton = () => {
-  const redirectSettings = useRedirect("/settings");
+  const { setModalIsOpen } = useSettings();
 
-  return <NavbarButton buttonLabel="Settings" onButtonClick={redirectSettings} />;
+  return (
+    <NavbarButton
+      buttonLabel="Settings"
+      onButtonClick={() => {
+        setModalIsOpen(true);
+      }}
+    />
+  );
 };
 
 export const LeaderboardButton = () => {

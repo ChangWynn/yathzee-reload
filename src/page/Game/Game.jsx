@@ -28,8 +28,8 @@ const Game = () => {
     <PageContainer id="game">
       <Navbar>
         <BackButton />
-        {/* <SettingsButton />
-        <RestartButton /> */}
+        {/* <SettingsButton /> */}
+        {/* <RestartButton /> */}
       </Navbar>
       <div
         className={getStyles([

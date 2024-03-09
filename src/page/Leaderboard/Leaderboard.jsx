@@ -20,12 +20,11 @@ const Leaderboard = () => {
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "leaderboard"), (querySnapshot) => {
+      const leaderboardRecords = [];
       querySnapshot.forEach((doc) => {
-        const { name, score } = doc.data();
-        setLeaderboard((prevState) => {
-          return [...prevState, { id: doc.id, name, score }];
-        });
+        leaderboardRecords.push(doc.data());
       });
+      setLeaderboard(leaderboardRecords);
     });
 
     return () => unsubscribe();

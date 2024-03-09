@@ -1,4 +1,5 @@
 .navbar-button {
+  cursor: pointer;
   text-align: center;
   width: 25%;
   font: inherit;
