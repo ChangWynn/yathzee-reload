@@ -1,3 +1,4 @@
+import useDiceState from "../../context/DiceState";
 import useGameFX from "../../context/GameFX";
 import useRoomsState from "../../context/RoomsState";
 import useSettings from "../../context/Settings";
@@ -19,14 +20,19 @@ const TotalScore = () => {
 export default TotalScore;
 
 const ScoreDecoration = () => {
+  const { initFxOn } = useSettings();
   const { scoreDecorationOn, isRollBtnHovered } = useGameFX();
   const { totalHasUpdated } = useRoomsState();
+  const { diceRolling } = useDiceState();
+
   return (
     <div
       className={getStyles([
         style["score-decoration"],
-        style[(scoreDecorationOn || isRollBtnHovered) && "normal-lights-up"],
-        style[scoreDecorationOn && totalHasUpdated && "quick-lights-up"],
+        style[
+          ((initFxOn && scoreDecorationOn) || isRollBtnHovered || diceRolling) && "normal-lights-up"
+        ],
+        style[((initFxOn && scoreDecorationOn) || totalHasUpdated) && "quick-lights-up"],
       ])}
     />
   );

@@ -24,6 +24,7 @@ const RollDiceButton = () => {
     getNewDice();
 
     setTimeout(() => {
+      switchRollBtnHoverFX.off();
       setDiceRolling(false);
     }, 800);
   };
