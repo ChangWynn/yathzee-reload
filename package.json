@@ -29,6 +29,8 @@
     ]
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.25.0",
+    "@tanstack/react-query-devtools": "^5.25.0",
     "firebase": "^10.8.1",
     "postcss": "^8.4.35",
     "react": "^18.2.0",

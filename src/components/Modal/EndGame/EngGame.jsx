@@ -4,22 +4,35 @@ import { db } from "../../../config/firebase.js";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, signInAnonymously } from "firebase/auth";
 
+import { useMutation } from "@tanstack/react-query";
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import style from "./EndGame.module.css";
 import Modal from "../ReactModal.jsx";
 import TotalScore from "../../TotalScore/TotalScore.jsx";
 import ModalButton from "../ModalButton.jsx";
 import { getStyles } from "../../../utils/functions/get-styles.js";
 
+import style from "./EndGame.module.css";
+
 const EngGame = () => {
   const navigate = useNavigate();
+
   const { totalScore, isEndGame } = useRoomsState();
-  const [username, setUsername] = useState("");
 
   const [anonymousUserCredentials, setAnonymousUserCredentials] = useState(null);
+  const [username, setUsername] = useState("");
+  const [isInvalid, setIsInvalid] = useState(false);
   const [error, setError] = useState(null);
+
+  const { mutate: saveScore, isPending } = useMutation({
+    mutationFn: async ({ name, score }) => {
+      await addDoc(collection(db, "leaderboard"), { name, score });
+    },
+    onSuccess: () => navigate("/leaderboard"),
+    onError: (error) => setError("Oops something went wrong. Please try again later."),
+  });
 
   useEffect(() => {
     const auth = getAuth();
@@ -34,25 +47,32 @@ const EngGame = () => {
     // return () => signOut(auth);
   }, []);
 
+  useEffect(() => {
+    const isAlphaNumeric = /^[a-zA-Z0-9]+$/.test(username);
+    if (username.length > 0 && !isAlphaNumeric) {
+      setIsInvalid(true);
+      setError("Special characters are not permitted");
+    } else {
+      setIsInvalid(false);
+      setError(null);
+    }
+  }, [username]);
+
   const refreshPage = () => {
     window.location.reload();
   };
 
-  const saveScore = async (e) => {
+  const submit = async (e) => {
     e.preventDefault();
+    if (isInvalid) return;
 
-    try {
-      await addDoc(collection(db, "leaderboard"), {
-        name: username,
-        score: +totalScore,
-        uid: anonymousUserCredentials.user.uid,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    navigate("/leaderboard");
+    saveScore({
+      name: username,
+      score: +totalScore,
+      uid: anonymousUserCredentials.user.uid,
+    });
   };
-  console.log(isEndGame);
+
   return (
     <Modal
       isOpen={isEndGame}
@@ -60,30 +80,32 @@ const EngGame = () => {
       height={"325px"}
       contentAriaLabel={"End Game Modal Window"}
     >
-      <form onSubmit={(e) => saveScore(e)} className={style["end-game-modal"]}>
+      <form onSubmit={(e) => submit(e)} className={style["end-game-modal"]}>
         <div className={style["end-game-modal--header-container"]}>
           <h1 className={style["header"]}>Save Score ?</h1>
           <TotalScore />
         </div>
         <div className={style["end-game-modal--form-container"]}>
           <div className={style["end-game-modal--input-container"]}>
-            <p className={style["input-helper"]}>Make it special!</p>
+            <p className={style["input-helper"]}>Max 15 characters. Must be alpha-numeric.</p>
             <input
+              required
               type="text"
               id="player-name"
               name="player-name"
               placeholder="Choose a username"
+              minLength={1}
               maxLength={15}
               onChange={(e) => setUsername(e.target.value)}
             />
-            <p className={getStyles([style["error"], style[!error && "hidden"]])}>{error}</p>
+            <em className={getStyles([style["error"], style[!error && "hidden"]])}>{error}</em>
           </div>
           <div className={style["end-game-modal--button-container"]}>
-            <ModalButton text="Replay" onClickFn={refreshPage} />
+            <ModalButton text="Back" onClickFn={() => navigate("/")} />
             <ModalButton
-              text="Save"
+              text={isPending ? "Saving..." : "Save"}
               type="submit"
-              isDisabled={!anonymousUserCredentials || !username}
+              isDisabled={!anonymousUserCredentials || isInvalid || error || !username}
               main
             />
           </div>
