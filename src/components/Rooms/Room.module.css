@@ -19,8 +19,13 @@
   &.reversed {
     flex-direction: row-reverse;
 
+    .room-name {
+      padding-left: 0;
+      padding-right: 0.5rem;
+    }
+
     .room-score {
-      border-radius: 5px 0 0 5px;
+      border-radius: 4px 0 0 4px;
       border-right-width: 1px;
       border-right-style: solid;
       border-left: none;
@@ -29,6 +34,7 @@
 
   .room-name {
     font-size: 1.7rem;
+    padding-left: 0.5rem;
   }
 
   .room-bonus-score-left {
@@ -45,7 +51,7 @@
 
     text-align: center;
     background-color: black;
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 4px 4px 0;
     border-left-width: 1px;
     border-left-style: solid;
 

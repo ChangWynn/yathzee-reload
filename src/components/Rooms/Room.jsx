@@ -8,6 +8,7 @@ import { ACTION } from "../../reducers/room-states";
 import useRoomScore from "../../hooks/use-room-score";
 import useDiceState from "../../context/DiceState";
 import useSettings from "../../context/Settings";
+import { formatRoomName } from "../../utils/functions/format-rooms-name";
 
 const Room = ({ roomName, resolveRoomScore, fxTiming, reversed = false }) => {
   const [roomFxOn, setRoomFxOn] = useState(false);
@@ -63,7 +64,7 @@ const Room = ({ roomName, resolveRoomScore, fxTiming, reversed = false }) => {
           style[isRollZero && "roll-zero-disabled"],
         ])}
       >
-        <span className={style["room-name"]}>{roomName}</span>
+        <span className={style["room-name"]}>{formatRoomName(roomName)}</span>
         {roomName === "bonus" && !roomStates.bonus.isLocked && (
           <span className={style["room-bonus-score-left"]}>{`(${
             63 - subTotalForBonus
