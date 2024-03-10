@@ -52,6 +52,7 @@ export const DiceState = ({ children }) => {
   const reInitDice = () => {
     setDice(rollingInitialDice);
     setDiceValues(null);
+    setRollCount(0);
 
     setTimeout(() => {
       setDice(notRollingInitialDice);

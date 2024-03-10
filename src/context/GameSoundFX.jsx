@@ -1,10 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import bootGameSoundFX from "../assets/sfx/boot-game.mp3";
 
-import rollDiceSFX1 from "../assets/sfx/roll-1.mp3";
-import rollDiceSFX2 from "../assets/sfx/roll-2.mp3";
-import rollDiceSFX3 from "../assets/sfx/roll-3.mp3";
-
 import lockDieSoundFX from "../assets/sfx/lock-die.mp3";
 
 import lockRoomCategorySFX1 from "../assets/sfx/lock-room-category-1.mp3";
@@ -18,6 +14,7 @@ import yahtzeeBonusSFX from "../assets/sfx/yahtzee-bonus.mp3";
 import useDiceState from "./DiceState";
 import useGameFX from "./GameFX";
 import useRoomsState from "./RoomsState";
+import { assets } from "../assets/assets";
 
 const GameSoundFxCtx = createContext(null);
 
@@ -35,9 +32,9 @@ export const GameSoundFX = ({ children }) => {
     new Audio(lockRoomCategoryBonusSFX4),
   ];
   const [diceRollSFX] = useState([
-    new Audio(rollDiceSFX1),
-    new Audio(rollDiceSFX2),
-    new Audio(rollDiceSFX3),
+    new Audio(assets.soundFx.roll[1]),
+    new Audio(assets.soundFx.roll[2]),
+    new Audio(assets.soundFx.roll[3]),
   ]);
   const [yahtzeeCelebrationsSFX] = useState([
     new Audio(yahtzeeCelebrationSFX),
