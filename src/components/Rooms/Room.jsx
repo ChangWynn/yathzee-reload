@@ -55,10 +55,12 @@ const Room = ({ roomName, resolveRoomScore, fxTiming, reversed = false }) => {
         className={getStyles([
           style["room"],
           style[reversed && "reversed"],
-          style[initFxOn && "init-state"],
           style[!initFxOn || roomFxOn ? "ready" : "not-ready"],
           style[roomState.isLocked && "locked"],
           style[!isRoomBonus && !roomState.isLocked && roomScore > 0 && !isRollZero && "potential"],
+          style[roomName === "bonus" && "bonus"],
+          style[diceRolling && "rolling"],
+          style[isRollZero && "roll-zero-disabled"],
         ])}
       >
         <span className={style["room-name"]}>{roomName}</span>
