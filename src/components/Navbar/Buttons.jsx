@@ -1,6 +1,7 @@
 import NavbarButton from "./NavbarButton";
 import useRedirect from "../../hooks/use-redirect";
 import useSettings from "../../context/Settings";
+import useRoomsState from "../../context/RoomsState";
 
 export const BackButton = () => {
   const backHome = useRedirect("/");
@@ -28,8 +29,18 @@ export const LeaderboardButton = () => {
 };
 
 export const PlayButton = () => {
+  const { resetGame } = useRoomsState();
   const redirectGame = useRedirect("/game");
-  return <NavbarButton buttonLabel="Play" onButtonClick={redirectGame} />;
+
+  return (
+    <NavbarButton
+      buttonLabel="Play"
+      onButtonClick={() => {
+        resetGame();
+        redirectGame();
+      }}
+    />
+  );
 };
 
 export const RestartButton = () => {

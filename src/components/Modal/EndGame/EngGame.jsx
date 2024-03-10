@@ -11,6 +11,7 @@ import style from "./EndGame.module.css";
 import Modal from "../ReactModal.jsx";
 import TotalScore from "../../TotalScore/TotalScore.jsx";
 import ModalButton from "../ModalButton.jsx";
+import { getStyles } from "../../../utils/functions/get-styles.js";
 
 const EngGame = () => {
   const navigate = useNavigate();
@@ -33,7 +34,13 @@ const EngGame = () => {
     // return () => signOut(auth);
   }, []);
 
-  const saveScore = async () => {
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
+  const saveScore = async (e) => {
+    e.preventDefault();
+
     try {
       await addDoc(collection(db, "leaderboard"), {
         name: username,
@@ -43,23 +50,9 @@ const EngGame = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const refreshPage = () => {
-    window.location.reload();
-  };
-
-  const saveAndReplay = async () => {
-    await saveScore();
-    refreshPage();
-  };
-
-  const saveAndLeaderboard = async (e) => {
-    e.preventDefault();
-    await saveScore();
     navigate("/leaderboard");
   };
-
+  console.log(isEndGame);
   return (
     <Modal
       isOpen={isEndGame}
@@ -67,8 +60,7 @@ const EngGame = () => {
       height={"325px"}
       contentAriaLabel={"End Game Modal Window"}
     >
-      {/* <strong className={style["total-score"]}>{totalScore}</strong> */}
-      <form onSubmit={(e) => saveAndLeaderboard(e)} className={style["end-game-modal"]}>
+      <form onSubmit={(e) => saveScore(e)} className={style["end-game-modal"]}>
         <div className={style["end-game-modal--header-container"]}>
           <h1 className={style["header"]}>Save Score ?</h1>
           <TotalScore />
@@ -84,8 +76,7 @@ const EngGame = () => {
               maxLength={15}
               onChange={(e) => setUsername(e.target.value)}
             />
-            {/* <p className={style["error"]}>error</p> */}
-            {/* <p className={getStyles([style["error"], style[!error && "hidden"]])}>{error}</p> */}
+            <p className={getStyles([style["error"], style[!error && "hidden"]])}>{error}</p>
           </div>
           <div className={style["end-game-modal--button-container"]}>
             <ModalButton text="Replay" onClickFn={refreshPage} />

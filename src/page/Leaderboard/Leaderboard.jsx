@@ -22,7 +22,7 @@ const Leaderboard = () => {
     const unsubscribe = onSnapshot(collection(db, "leaderboard"), (querySnapshot) => {
       const leaderboardRecords = [];
       querySnapshot.forEach((doc) => {
-        leaderboardRecords.push(doc.data());
+        leaderboardRecords.push({ ...doc.data(), id: doc.id });
       });
       setLeaderboard(leaderboardRecords);
     });
@@ -48,21 +48,6 @@ const Leaderboard = () => {
             </thead>
             <tbody className={style["leaderboard__table-body"]}>{renderLeaderbordTable()}</tbody>
           </table>
-          {/* {players
-            .sort((a, b) => (parseInt(a.scores.score) < parseInt(b.scores.score) ? 1 : -1))
-            .map((player) => {
-              return (
-                <article className={style["score-container"]} key={player._id}>
-                  <div className={style["score-container-left-side"]}>
-                    <div>
-                      <img src={player.avatar} alt="" />
-                    </div>
-                    <h2>{player.username}</h2>
-                  </div>
-                  <h2>{player.scores.score}</h2>
-                </article>
-              );
-            })} */}
         </div>
       </div>
     </PageContainer>

@@ -86,9 +86,10 @@ export const RoomsState = ({ children }) => {
 
   const resetGame = () => {
     setIsEndGame(false);
-    dispatchRoomStates({ action: ACTION.RESET_GAME, payload: {} });
     reInitDice();
+    dispatchRoomStates({ action: ACTION.RESET_GAME, payload: {} });
   };
+
   return (
     <RoomsStateCtx.Provider
       value={{

@@ -51,7 +51,7 @@ export const roomStatesReducer = (state, { action, payload }) => {
       return newState;
     }
     case ACTION.RESET_GAME: {
-      return initialRoomStates;
+      return { ...initialRoomStates };
     }
     default: {
       return state;

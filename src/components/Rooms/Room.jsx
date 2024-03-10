@@ -54,7 +54,6 @@ const Room = ({ roomName, resolveRoomScore, fxTiming, reversed = false }) => {
         disabled={isDisabled}
         className={getStyles([
           style["room"],
-          style[roomName],
           style[reversed && "reversed"],
           style[initFxOn && "init-state"],
           style[!initFxOn || roomFxOn ? "ready" : "not-ready"],
