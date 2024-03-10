@@ -29,7 +29,7 @@ const Game = () => {
       <Navbar>
         <BackButton />
         {/* <SettingsButton /> */}
-        {/* <RestartButton /> */}
+        <RestartButton />
       </Navbar>
       <div
         className={getStyles([

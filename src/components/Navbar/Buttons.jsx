@@ -44,5 +44,6 @@ export const PlayButton = () => {
 };
 
 export const RestartButton = () => {
-  return <NavbarButton buttonLabel="Restart" onButtonClick={() => {}} />;
+  const { resetGame } = useRoomsState();
+  return <NavbarButton buttonLabel="Restart" onButtonClick={resetGame} />;
 };
