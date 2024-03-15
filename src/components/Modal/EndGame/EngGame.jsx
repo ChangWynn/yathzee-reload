@@ -62,6 +62,11 @@ const EngGame = () => {
     window.location.reload();
   };
 
+  const handleInputChange = (e) => {
+    if (username >= 15) return;
+    else setUsername(e.target.value);
+  };
+
   const submit = async (e) => {
     e.preventDefault();
     if (isInvalid) return;
@@ -96,7 +101,8 @@ const EngGame = () => {
               placeholder="Choose a username"
               minLength={1}
               maxLength={15}
-              onChange={(e) => setUsername(e.target.value)}
+              spellCheck={false}
+              onChange={handleInputChange}
             />
             <em className={getStyles([style["error"], style[!error && "hidden"]])}>{error}</em>
           </div>

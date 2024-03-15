@@ -1,40 +1,25 @@
-import { useEffect, useState } from "react";
 import PageContainer from "../PageContainer";
 import style from "./Leaderboard.module.css";
 
-import { db } from "../../config/firebase";
-import { collection, onSnapshot } from "firebase/firestore";
 import Navbar from "../../components/Navbar/Navbar";
-import { BackButton, PlayButton, SettingsButton } from "../../components/Navbar/Buttons";
+import { BackButton, PlayButton } from "../../components/Navbar/Buttons";
+import useRealTimeQuery from "../../hooks/use-real-time-query";
 
 const Leaderboard = () => {
-  const [leaderboard, setLeaderboard] = useState([]);
+  const { data } = useRealTimeQuery("leaderboard");
 
   const renderLeaderbordTable = () => {
-    return leaderboard
+    return data
       .sort((a, b) => b.score - a.score)
       .map(({ id, name, score }) => {
         return <LeaderboardRow key={id} name={name} score={score} />;
       });
   };
 
-  useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "leaderboard"), (querySnapshot) => {
-      const leaderboardRecords = [];
-      querySnapshot.forEach((doc) => {
-        leaderboardRecords.push({ ...doc.data(), id: doc.id });
-      });
-      setLeaderboard(leaderboardRecords);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
   return (
     <PageContainer id="leaderboard">
       <Navbar>
         <BackButton />
-        {/* <SettingsButton /> */}
         <PlayButton />
       </Navbar>
       <div className={style["leaderboard__container"]}>
@@ -46,7 +31,15 @@ const Leaderboard = () => {
                 <th>Score</th>
               </tr>
             </thead>
-            <tbody className={style["leaderboard__table-body"]}>{renderLeaderbordTable()}</tbody>
+            <tbody className={style["leaderboard__table-body"]}>
+              {data ? (
+                renderLeaderbordTable()
+              ) : (
+                <tr>
+                  <td>Loading...</td>
+                </tr>
+              )}
+            </tbody>
           </table>
         </div>
       </div>
