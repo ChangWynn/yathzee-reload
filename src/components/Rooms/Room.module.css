@@ -33,12 +33,13 @@
   }
 
   .room-name {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
     padding-left: 0.5rem;
   }
 
   .room-bonus-score-left {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    text-align: center;
   }
 
   .room-score {
@@ -57,7 +58,7 @@
 
     p {
       opacity: 1;
-      font-size: 1.7rem;
+      font-size: 1.5rem;
     }
   }
 }
@@ -192,7 +193,6 @@
       }
 
       .room-bonus-score-left {
-        font-size: 1.5rem;
         color: #c683d3;
       }
 

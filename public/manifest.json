@@ -1,12 +1,12 @@
 {
   "name": "Yahtzee Reload",
   "short_name": "Yahtzee",
-  "start_url": "/index.html",
+  "start_url": "/",
   "scope": ".",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#110012",
-  "theme_color": "#f580f8",
+  "theme_color": "#110012",
   "description": "Classic Yahtzee game in a cyberpunk atmosphere",
   "dir": "ltr",
   "lang": "en-US"

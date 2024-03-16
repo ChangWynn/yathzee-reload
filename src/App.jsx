@@ -8,7 +8,7 @@ import Leaderboard from "./page/Leaderboard/Leaderboard";
 import { RoomsState } from "./context/RoomsState";
 import { DiceState } from "./context/DiceState";
 import { GameFX } from "./context/GameFX";
-import { GameSoundFX } from "./context/GameSoundFX";
+import AudioProvider from "./context/AudioContext";
 
 import { Routes, Route } from "react-router-dom";
 import { Settings } from "./context/Settings";
@@ -22,13 +22,13 @@ const App = () => {
         <DiceState>
           <RoomsState>
             <GameFX>
-              <GameSoundFX>
+              <AudioProvider>
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/game" element={<Game />} />
                   <Route path="/leaderboard" element={<Leaderboard />} />
                 </Routes>
-              </GameSoundFX>
+              </AudioProvider>
             </GameFX>
           </RoomsState>
         </DiceState>

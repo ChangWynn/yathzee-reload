@@ -2,14 +2,13 @@ import useRoomsState from "../../context/RoomsState";
 import { ACTION } from "../../reducers/room-states";
 import Room from "./Room";
 import style from "./Rooms.module.css";
-import useGameSoundFX from "../../context/GameSoundFX";
+import { useAudioContext } from "../../context/AudioContext";
 import useDiceState from "../../context/DiceState";
-import { getStyles } from "../../utils/functions/get-styles";
 
 const Rooms = () => {
   const { subTotalForBonus, roomStates, dispatchRoomStates } = useRoomsState();
   const { diceValues, isYahtzee } = useDiceState();
-  const { playLockRoomCategorySFX } = useGameSoundFX();
+  const { playLockRoomAudio } = useAudioContext();
 
   const getUniqueDice = () => {
     return [...new Set(diceValues)];
@@ -26,7 +25,7 @@ const Rooms = () => {
   const resolveBonusScore = () => {
     if (roomStates.bonus.isLocked) return;
     if (subTotalForBonus >= 63) {
-      playLockRoomCategorySFX(4);
+      playLockRoomAudio(3);
       dispatchRoomStates({
         action: ACTION.LOCK_ROOM,
         payload: {

@@ -3,7 +3,7 @@ import useRoomsState from "../../context/RoomsState";
 import useGameFX from "../../context/GameFX";
 import { getStyles } from "../../utils/functions/get-styles";
 import { useEffect, useState } from "react";
-import useGameSoundFX from "../../context/GameSoundFX";
+import { useAudioContext } from "../../context/AudioContext";
 import { ACTION } from "../../reducers/room-states";
 import useRoomScore from "../../hooks/use-room-score";
 import useDiceState from "../../context/DiceState";
@@ -15,7 +15,7 @@ const Room = ({ roomName, resolveRoomScore, fxTiming, reversed = false }) => {
 
   const { initFxOn } = useSettings();
   const { init } = useGameFX();
-  const { playLockRoomCategorySFX } = useGameSoundFX();
+  const { playLockRoomAudio } = useAudioContext();
   const { roomStates, dispatchRoomStates, subTotalForBonus } = useRoomsState();
   const { isYahtzee, setIsYahtzee, resetDice, resetRollCount, isRollZero, diceRolling } =
     useDiceState();
@@ -43,7 +43,7 @@ const Room = ({ roomName, resolveRoomScore, fxTiming, reversed = false }) => {
         roomScore,
       },
     });
-    playLockRoomCategorySFX(roomState.soundFx);
+    playLockRoomAudio(roomState.soundFx);
     resetRollCount();
     resetDice();
   };

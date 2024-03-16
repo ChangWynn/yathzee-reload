@@ -44,15 +44,12 @@ export const GameFX = ({ children }) => {
   }, [initFxOn, init]);
 
   useEffect(() => {
-    let yahtzeeTimeout;
     if (isYahtzee) {
       setYahtzeeFxOn(true);
-      yahtzeeTimeout = setTimeout(() => {
+      setTimeout(() => {
         setYahtzeeFxOn(false);
       }, 2000);
     }
-
-    return () => clearTimeout(yahtzeeTimeout);
   }, [isYahtzee]);
 
   const launchEffect = (setEffect, timing = 0) => {

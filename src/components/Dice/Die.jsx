@@ -1,22 +1,21 @@
 import style from "./Die.module.css";
 import useGameFX from "../../context/GameFX";
-import useGameSoundFX from "../../context/GameSoundFX";
+import { useAudioContext } from "../../context/AudioContext";
 import { getStyles } from "../../utils/functions/get-styles";
 import useDiceState from "../../context/DiceState";
 import useSettings from "../../context/Settings";
-import { assets } from "../../assets/assets";
 
 const Die = ({ index, die }) => {
   const { initFxOn } = useSettings();
   const { diceOn, isRollBtnHovered } = useGameFX();
-  const { playLockDieSFX } = useGameSoundFX();
+  const { playLockDieAudio } = useAudioContext();
   const { dice, setDice, rollCount } = useDiceState();
 
   const isRollZero = rollCount === 0;
 
   const toggleLock = () => {
     if (isRollZero) return;
-    playLockDieSFX();
+    playLockDieAudio();
     const updatedDice = [...dice];
     updatedDice[index].isLocked = !updatedDice[index].isLocked;
     setDice([...updatedDice]);
@@ -35,7 +34,7 @@ const Die = ({ index, die }) => {
     >
       <img
         className={style[!initFxOn || diceOn ? "shown" : "hidden"]}
-        src={assets.dice[die.value]}
+        src={`assets/dice/128x128/dice-${die.value}.png`}
         alt={`dice number ${die.value}`}
       />
     </div>

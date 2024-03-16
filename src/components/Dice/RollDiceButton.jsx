@@ -1,7 +1,7 @@
 import style from "./RollDiceButton.module.css";
 
 import useGameFX from "../../context/GameFX";
-import useGameSoundFX from "../../context/GameSoundFX";
+import { useAudioContext } from "../../context/AudioContext";
 import { getStyles } from "../../utils/functions/get-styles";
 import useDiceState from "../../context/DiceState";
 import useSettings from "../../context/Settings";
@@ -9,8 +9,8 @@ import Dots from "../Dots/Dots";
 
 const RollDiceButton = () => {
   const { setIsRollBtnHovered } = useGameFX();
-  const { playDiceRollSFX } = useGameSoundFX();
-  const { getNewDice, setDiceRolling } = useDiceState();
+  const { playRollDiceAudio } = useAudioContext();
+  const { rollCount, getNewDice, setDiceRolling } = useDiceState();
 
   const isDisabled = useIsDisabled();
 
@@ -21,7 +21,7 @@ const RollDiceButton = () => {
 
   const rollDice = () => {
     setDiceRolling(true);
-    playDiceRollSFX();
+    playRollDiceAudio(rollCount);
     getNewDice();
 
     setTimeout(() => {

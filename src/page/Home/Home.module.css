@@ -70,18 +70,22 @@
   gap: 3rem;
   z-index: 1;
 
-  li a {
-    color: var(--pink-text-hovered);
-    text-shadow: 0 0 10px var(--pink-text-shadow);
-    text-decoration: none;
-    font-size: 1.3rem;
+  li {
+    list-style-type: none;
 
-    &:hover {
+    a {
       color: var(--pink-text-hovered);
-      transition: all 0.1s ease-in-out;
-      animation-name: flickering-effect;
-      animation-duration: 3s;
-      animation-iteration-count: infinite;
+      text-shadow: 0 0 10px var(--pink-text-shadow);
+      text-decoration: none;
+      font-size: 1.3rem;
+
+      &:hover {
+        color: var(--pink-text-hovered);
+        transition: all 0.1s ease-in-out;
+        animation-name: flickering-effect;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+      }
     }
   }
 }

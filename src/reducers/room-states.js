@@ -3,19 +3,19 @@ const getInitialRoomState = (name, soundFx) => {
 };
 
 export const initialRoomStates = {
-  ones: getInitialRoomState("ones", 1),
-  twos: getInitialRoomState("twos", 1),
-  threes: getInitialRoomState("threes", 1),
-  fours: getInitialRoomState("fours", 1),
-  fives: getInitialRoomState("fives", 1),
-  sixes: getInitialRoomState("sixes", 1),
+  ones: getInitialRoomState("ones", 0),
+  twos: getInitialRoomState("twos", 0),
+  threes: getInitialRoomState("threes", 0),
+  fours: getInitialRoomState("fours", 0),
+  fives: getInitialRoomState("fives", 0),
+  sixes: getInitialRoomState("sixes", 0),
   bonus: getInitialRoomState("bonus", 3),
-  threeOfAKind: getInitialRoomState("threeOfAKind", 2),
-  fourOfAKind: getInitialRoomState("fourOfAKind", 2),
-  fullHouse: getInitialRoomState("fullHouse", 2),
-  smallStraight: getInitialRoomState("smallStraight", 3),
-  largeStraight: getInitialRoomState("largeStraight", 3),
-  yahtzee: getInitialRoomState("yahtzee", 3),
+  threeOfAKind: getInitialRoomState("threeOfAKind", 1),
+  fourOfAKind: getInitialRoomState("fourOfAKind", 1),
+  fullHouse: getInitialRoomState("fullHouse", 1),
+  smallStraight: getInitialRoomState("smallStraight", 2),
+  largeStraight: getInitialRoomState("largeStraight", 2),
+  yahtzee: getInitialRoomState("yahtzee", 2),
   chance: getInitialRoomState("chance", 1),
 };
 
