@@ -33,6 +33,14 @@ const Room = ({ roomName, resolveRoomScore, fxTiming, reversed = false }) => {
     }
   }, [init, fxTiming]);
 
+  const resolveDisplayedScore = () => {
+    if (roomState.isLocked) {
+      return roomState.lockedScore + (roomName === "yahtzee" ? roomState.totalExtraScore : 0);
+    }
+    if (isRollZero && !isRoomBonus) return 0;
+    return roomScore;
+  };
+
   const lockRoom = () => {
     if (isYahtzee) setIsYahtzee(false);
     dispatchRoomStates({
@@ -70,13 +78,7 @@ const Room = ({ roomName, resolveRoomScore, fxTiming, reversed = false }) => {
           } pts left)`}</span>
         )}
         <span className={style["room-score"]}>
-          <p>
-            {isRollZero && !isRoomBonus && roomState.lockedScore === 0
-              ? "0"
-              : roomState.isLocked
-              ? roomState.lockedScore
-              : roomScore}
-          </p>
+          <p>{resolveDisplayedScore()}</p>
         </span>
       </button>
     );
