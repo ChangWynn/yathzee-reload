@@ -52,7 +52,11 @@ const TitleLetter = ({ letter, cssEffect }) => {
     <div
       className={getStyles([style["home-title__letter-container"], cssEffect && style[cssEffect]])}
     >
-      <img src={`assets/yahtzee-letters/${letter}.png`} alt={`Title letter ${letter}`} />
+      <img
+        src={`assets/yahtzee-letters/100x189/${letter}.webp`}
+        alt={`Title letter ${letter}`}
+        type="image/webp"
+      />
     </div>
   );
 };

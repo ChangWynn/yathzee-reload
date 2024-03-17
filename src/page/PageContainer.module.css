@@ -11,7 +11,7 @@
 
 @media (max-width: 500px) {
   .container {
-    background: url("/public/assets/background/mobile/background_1-720x1208.jpg") no-repeat center
+    background: url("/public/assets/background/mobile/background_1-720x1208.webp") no-repeat center
       center/cover;
 
     &::after {

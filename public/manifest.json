@@ -7,7 +7,19 @@
   "orientation": "portrait-primary",
   "background_color": "#110012",
   "theme_color": "#110012",
-  "description": "Classic Yahtzee game in a cyberpunk atmosphere",
+  "description": "Classic Yahtzee game in a cyberpunk universe",
   "dir": "ltr",
-  "lang": "en-US"
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "assets/dice/128x128/dice-3.webp",
+      "type": "image/webp",
+      "sizes": "128x128"
+    },
+    {
+      "src": "assets/dice/512x512/dice-3.webp",
+      "type": "image/webp",
+      "sizes": "512x512"
+    }
+  ]
 }

@@ -108,28 +108,28 @@ code {
 
 @media (500px <= width <= 768px) {
   body {
-    background: url("/public/assets/background/desktop/background_1-800x600.jpg") no-repeat center
+    background: url("/public/assets/background/desktop/background_1-800x600.webp") no-repeat center
       center/cover;
   }
 }
 
 @media (769px <= width <= 1080px) {
   body {
-    background: url("/public/assets/background/desktop/background_1-1920x1080.jpg") no-repeat center
-      center/cover;
+    background: url("/public/assets/background/desktop/background_1-1920x1080.webp") no-repeat
+      center center/cover;
   }
 }
 
 @media (1081px <= width <= 1440px) {
   body {
-    background: url("/public/assets/background/desktop/background_1-2560x1440.jpg") no-repeat center
-      center/cover;
+    background: url("/public/assets/background/desktop/background_1-2560x1440.webp") no-repeat
+      center center/cover;
   }
 }
 
 @media (min-width: 1441px) {
   body {
-    background: url("/public/assets/background/desktop/background_1-3840x2160.jpg") no-repeat center
-      center/cover;
+    background: url("/public/assets/background/desktop/background_1-3840x2160.webp") no-repeat
+      center center/cover;
   }
 }

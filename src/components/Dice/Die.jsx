@@ -34,7 +34,7 @@ const Die = ({ index, die }) => {
     >
       <img
         className={style[!initFxOn || diceOn ? "shown" : "hidden"]}
-        src={`assets/dice/128x128/dice-${die.value}.png`}
+        src={`assets/dice/128x128/dice-${die.value}.webp`}
         alt={`dice number ${die.value}`}
       />
     </div>
