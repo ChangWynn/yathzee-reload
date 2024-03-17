@@ -2,9 +2,9 @@ import { createContext, useContext, useState } from "react";
 import { notRollingInitialDice, rollingInitialDice } from "../utils/constants/initial-dice-state";
 import { useEffect } from "react";
 
-const DiceCtx = createContext(null);
+const DiceContext = createContext(null);
 
-export const DiceState = ({ children }) => {
+const DiceStateProvider = ({ children }) => {
   const [dice, setDice] = useState(notRollingInitialDice);
   const [diceValues, setDiceValues] = useState(null);
   const [isYahtzee, setIsYahtzee] = useState(false);
@@ -66,7 +66,7 @@ export const DiceState = ({ children }) => {
   }, [diceValues]);
 
   return (
-    <DiceCtx.Provider
+    <DiceContext.Provider
       value={{
         dice,
         setDice,
@@ -84,10 +84,12 @@ export const DiceState = ({ children }) => {
       }}
     >
       {children}
-    </DiceCtx.Provider>
+    </DiceContext.Provider>
   );
 };
 
-export default function useDiceState() {
-  return useContext(DiceCtx);
+export default DiceStateProvider;
+
+export function useDiceContext() {
+  return useContext(DiceContext);
 }

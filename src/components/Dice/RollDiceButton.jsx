@@ -3,14 +3,14 @@ import style from "./RollDiceButton.module.css";
 import useGameFX from "../../context/GameFX";
 import { useAudioContext } from "../../context/AudioContext";
 import { getStyles } from "../../utils/functions/get-styles";
-import useDiceState from "../../context/DiceState";
+import { useDiceContext } from "../../context/DiceContext";
 import useSettings from "../../context/Settings";
 import Dots from "../Dots/Dots";
 
 const RollDiceButton = () => {
   const { setIsRollBtnHovered } = useGameFX();
   const { playRollDiceAudio } = useAudioContext();
-  const { rollCount, getNewDice, setDiceRolling } = useDiceState();
+  const { rollCount, getNewDice, setDiceRolling } = useDiceContext();
 
   const isDisabled = useIsDisabled();
 
@@ -52,7 +52,7 @@ export default RollDiceButton;
 
 const useIsDisabled = () => {
   const { initFxOn } = useSettings();
-  const { isYahtzee, rollCount, diceRolling } = useDiceState();
+  const { isYahtzee, rollCount, diceRolling } = useDiceContext();
   const { rollButtonOn } = useGameFX();
 
   if (initFxOn) {

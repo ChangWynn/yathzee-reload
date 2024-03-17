@@ -1,4 +1,4 @@
-import useRoomsState from "../../../context/RoomsState.jsx";
+import { useGameContext } from "../../../context/GameContext.jsx";
 
 import { db } from "../../../config/firebase.js";
 import { collection, addDoc } from "firebase/firestore";
@@ -19,7 +19,7 @@ import style from "./EndGame.module.css";
 const EngGame = () => {
   const navigate = useNavigate();
 
-  const { totalScore, isEndGame } = useRoomsState();
+  const { totalScore, isEndGame } = useGameContext();
 
   const [anonymousUserCredentials, setAnonymousUserCredentials] = useState(null);
   const [username, setUsername] = useState("");

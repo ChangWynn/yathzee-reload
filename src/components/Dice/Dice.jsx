@@ -3,13 +3,13 @@ import style from "./Dice.module.css";
 import useGameFX from "../../context/GameFX";
 import Die from "./Die";
 import { getStyles } from "../../utils/functions/get-styles";
-import useDiceState from "../../context/DiceState";
+import { useDiceContext } from "../../context/DiceContext";
 import useSettings from "../../context/Settings";
 
 const Dice = () => {
   const { initFxOn } = useSettings();
   const { diceContainerOn, isRollBtnHovered } = useGameFX();
-  const { dice, diceRolling } = useDiceState();
+  const { dice, diceRolling } = useDiceContext();
 
   return (
     <div

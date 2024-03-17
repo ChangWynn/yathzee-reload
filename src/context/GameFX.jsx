@@ -1,11 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import useDiceState from "./DiceState";
+import { useDiceContext } from "./DiceContext";
 import useSettings from "./Settings";
 
 const GameFxCtx = createContext(null);
 
 export const GameFX = ({ children }) => {
-  const { isYahtzee } = useDiceState();
+  const { isYahtzee } = useDiceContext();
   const { initFxOn } = useSettings();
 
   const [init, setInit] = useState(false);

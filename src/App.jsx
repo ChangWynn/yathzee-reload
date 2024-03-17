@@ -5,9 +5,9 @@ import Home from "./page/Home/Home";
 import Game from "./page/Game/Game";
 import Leaderboard from "./page/Leaderboard/Leaderboard";
 
-import { RoomsState } from "./context/RoomsState";
-import { DiceState } from "./context/DiceState";
 import { GameFX } from "./context/GameFX";
+import GameStateProvider from "./context/GameContext";
+import DiceStateProvider from "./context/DiceContext";
 import AudioProvider from "./context/AudioContext";
 
 import { Routes, Route } from "react-router-dom";
@@ -19,8 +19,8 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Settings>
-        <DiceState>
-          <RoomsState>
+        <DiceStateProvider>
+          <GameStateProvider>
             <GameFX>
               <AudioProvider>
                 <Routes>
@@ -30,8 +30,8 @@ const App = () => {
                 </Routes>
               </AudioProvider>
             </GameFX>
-          </RoomsState>
-        </DiceState>
+          </GameStateProvider>
+        </DiceStateProvider>
       </Settings>
       <ReactQueryDevtools />
     </QueryClientProvider>

@@ -3,7 +3,7 @@ import style from "./Leaderboard.module.css";
 
 import Navbar from "../../components/Navbar/Navbar";
 import { BackButton, PlayButton } from "../../components/Navbar/Buttons";
-import useRealTimeQuery from "../../hooks/use-real-time-query";
+import { useRealTimeQuery } from "../../hooks/use-real-time-query";
 
 const Leaderboard = () => {
   const { data } = useRealTimeQuery("leaderboard");

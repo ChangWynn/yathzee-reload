@@ -6,7 +6,23 @@ const Home = () => {
   return (
     <div className={style["home"]}>
       <div className={style["home-background"]}>
-        <VideoBackground />
+        <video autoPlay loop muted preload="auto">
+          <source
+            src="assets/background/desktop/video_background-1080p.mp4"
+            type="video/mp4"
+            media="(min-width: 769px)"
+          />
+          <source
+            src="assets/background/mobile/video_background-720p.mp4"
+            type="video/mp4"
+            media="(min-width: 481px) and (max-width: 768px)"
+          />
+          <source
+            src="assets/background/mobile/video_background-480p.mp4"
+            type="video/mp4"
+            media="(max-width: 480px)"
+          />
+        </video>
       </div>
       <div className={style["home-title"]}>
         <TitleLetter letter="Y" cssEffect="flickering" />
@@ -30,28 +46,6 @@ const Home = () => {
 };
 
 export default Home;
-
-const VideoBackground = () => {
-  return (
-    <video autoPlay loop muted>
-      <source
-        src="assets/background/desktop/video_background-1080p.mp4"
-        type="video/mp4"
-        media="(min-width: 769px)"
-      />
-      <source
-        src="assets/background/mobile/video_background-720p.mp4"
-        type="video/mp4"
-        media="(min-width: 481px) and (max-width: 768px)"
-      />
-      <source
-        src="assets/background/mobile/video_background-480p.mp4"
-        type="video/mp4"
-        media="(max-width: 480px)"
-      />
-    </video>
-  );
-};
 
 const TitleLetter = ({ letter, cssEffect }) => {
   return (

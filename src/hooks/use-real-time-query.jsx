@@ -3,7 +3,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
 import { db } from "../config/firebase";
 
-const useRealTimeQuery = (queryKey) => {
+export const useRealTimeQuery = (queryKey) => {
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -16,7 +16,6 @@ const useRealTimeQuery = (queryKey) => {
     });
 
     return () => {
-      console.log("unsubscribing");
       unsubscribe();
     };
   }, [queryClient, queryKey]);
@@ -30,5 +29,3 @@ const useRealTimeQuery = (queryKey) => {
     },
   });
 };
-
-export default useRealTimeQuery;

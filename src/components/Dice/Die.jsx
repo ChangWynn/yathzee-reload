@@ -2,14 +2,14 @@ import style from "./Die.module.css";
 import useGameFX from "../../context/GameFX";
 import { useAudioContext } from "../../context/AudioContext";
 import { getStyles } from "../../utils/functions/get-styles";
-import useDiceState from "../../context/DiceState";
+import { useDiceContext } from "../../context/DiceContext";
 import useSettings from "../../context/Settings";
 
 const Die = ({ index, die }) => {
   const { initFxOn } = useSettings();
   const { diceOn, isRollBtnHovered } = useGameFX();
   const { playLockDieAudio } = useAudioContext();
-  const { dice, setDice, rollCount } = useDiceState();
+  const { dice, setDice, rollCount } = useDiceContext();
 
   const isRollZero = rollCount === 0;
 

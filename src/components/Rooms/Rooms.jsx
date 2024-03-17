@@ -1,13 +1,13 @@
-import useRoomsState from "../../context/RoomsState";
+import { useGameContext } from "../../context/GameContext";
 import { ACTION } from "../../reducers/room-states";
 import Room from "./Room";
 import style from "./Rooms.module.css";
 import { useAudioContext } from "../../context/AudioContext";
-import useDiceState from "../../context/DiceState";
+import { useDiceContext } from "../../context/DiceContext";
 
 const Rooms = () => {
-  const { subTotalForBonus, roomStates, dispatchRoomStates } = useRoomsState();
-  const { diceValues, isYahtzee } = useDiceState();
+  const { subTotalForBonus, roomStates, dispatchRoomStates } = useGameContext();
+  const { diceValues, isYahtzee } = useDiceContext();
   const { playLockRoomAudio } = useAudioContext();
 
   const getUniqueDice = () => {

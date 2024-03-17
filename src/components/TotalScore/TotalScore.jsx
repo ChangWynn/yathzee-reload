@@ -1,6 +1,6 @@
-import useDiceState from "../../context/DiceState";
+import { useDiceContext } from "../../context/DiceContext";
 import useGameFX from "../../context/GameFX";
-import useRoomsState from "../../context/RoomsState";
+import { useGameContext } from "../../context/GameContext";
 import useSettings from "../../context/Settings";
 import { getStyles } from "../../utils/functions/get-styles";
 import style from "./TotalScore.module.css";
@@ -22,8 +22,8 @@ export default TotalScore;
 const ScoreDecoration = () => {
   const { initFxOn } = useSettings();
   const { scoreDecorationOn, isRollBtnHovered } = useGameFX();
-  const { totalHasUpdated, isEndGame } = useRoomsState();
-  const { diceRolling } = useDiceState();
+  const { totalHasUpdated, isEndGame } = useGameContext();
+  const { diceRolling } = useDiceContext();
 
   return (
     <div
@@ -42,7 +42,7 @@ const ScoreDecoration = () => {
 const Score = () => {
   const { initFxOn } = useSettings();
   const { totalScoreOn } = useGameFX();
-  const { totalScore, totalHasUpdated } = useRoomsState();
+  const { totalScore, totalHasUpdated } = useGameContext();
 
   return (
     <strong

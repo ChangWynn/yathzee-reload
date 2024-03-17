@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef, forwardRef, createContext, useContext } from "react";
 
 import useGameFX from "./GameFX";
-import useRoomsState from "./RoomsState";
+import { useGameContext } from "./GameContext";
 
 const AudioContext = createContext(null);
 
 const AudioProvider = ({ children }) => {
-  const { roomStates } = useRoomsState();
+  const { roomStates } = useGameContext();
   const { yahtzeeFxOn } = useGameFX();
 
   const lockDieAudioRef = useRef(null);
@@ -76,6 +76,7 @@ const Audio = forwardRef(({ filename }, ref) => {
 
 const useAudio = (ref) => {
   const [audioRef] = useState([...ref]);
+
   const playAudioRef = (index = 0) => {
     if (audioRef[index].current) {
       audioRef[index].current.currentTime = 0;

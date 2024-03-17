@@ -1,11 +1,11 @@
 import { createContext, useCallback, useContext, useEffect, useReducer, useState } from "react";
 import { ACTION, initialRoomStates, roomStatesReducer } from "../reducers/room-states";
-import useDiceState from "./DiceState";
+import { useDiceContext } from "./DiceContext";
 
-const RoomsStateCtx = createContext(null);
+const GameContext = createContext(null);
 
-export const RoomsState = ({ children }) => {
-  const { reInitDice, isYahtzee } = useDiceState();
+const GameStateProvider = ({ children }) => {
+  const { reInitDice, isYahtzee } = useDiceContext();
   const [roomStates, dispatchRoomStates] = useReducer(roomStatesReducer, initialRoomStates);
 
   const [subTotalForBonus, setSubTotalForBonus] = useState(0);
@@ -91,7 +91,7 @@ export const RoomsState = ({ children }) => {
   };
 
   return (
-    <RoomsStateCtx.Provider
+    <GameContext.Provider
       value={{
         roomStates,
         dispatchRoomStates,
@@ -104,10 +104,12 @@ export const RoomsState = ({ children }) => {
       }}
     >
       {children}
-    </RoomsStateCtx.Provider>
+    </GameContext.Provider>
   );
 };
 
-export default function useRoomsState() {
-  return useContext(RoomsStateCtx);
+export default GameStateProvider;
+
+export function useGameContext() {
+  return useContext(GameContext);
 }

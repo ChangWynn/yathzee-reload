@@ -1,12 +1,11 @@
 import style from "./Room.module.css";
-import useRoomsState from "../../context/RoomsState";
+import { useGameContext } from "../../context/GameContext";
 import useGameFX from "../../context/GameFX";
 import { getStyles } from "../../utils/functions/get-styles";
 import { useEffect, useState } from "react";
 import { useAudioContext } from "../../context/AudioContext";
 import { ACTION } from "../../reducers/room-states";
-import useRoomScore from "../../hooks/use-room-score";
-import useDiceState from "../../context/DiceState";
+import { useDiceContext } from "../../context/DiceContext";
 import useSettings from "../../context/Settings";
 import { formatRoomName } from "../../utils/functions/format-rooms-name";
 
@@ -16,9 +15,9 @@ const Room = ({ roomName, resolveRoomScore, fxTiming, reversed = false }) => {
   const { initFxOn } = useSettings();
   const { init } = useGameFX();
   const { playLockRoomAudio } = useAudioContext();
-  const { roomStates, dispatchRoomStates, subTotalForBonus } = useRoomsState();
+  const { roomStates, dispatchRoomStates, subTotalForBonus } = useGameContext();
   const { isYahtzee, setIsYahtzee, resetDice, resetRollCount, isRollZero, diceRolling } =
-    useDiceState();
+    useDiceContext();
 
   const roomState = roomStates[roomName];
   const roomScore = useRoomScore(roomName, resolveRoomScore);
@@ -88,7 +87,7 @@ export default Room;
 
 const useIsDisabled = ({ roomState, isRoomBonus }) => {
   const { initFxOn } = useSettings();
-  const { diceRolling, isRollZero } = useDiceState();
+  const { diceRolling, isRollZero } = useDiceContext();
   const { gameIsReady } = useGameFX();
 
   if (initFxOn) {
@@ -96,4 +95,22 @@ const useIsDisabled = ({ roomState, isRoomBonus }) => {
   } else {
     return diceRolling || isRoomBonus || isRollZero || roomState.isLocked;
   }
+};
+
+const useRoomScore = (roomName, resolveRoomScore) => {
+  const { diceValues } = useDiceContext();
+  const { roomStates } = useGameContext();
+
+  const [roomScore, setRoomScore] = useState(0);
+
+  useEffect(() => {
+    if (!roomStates[roomName].isLocked && diceValues) {
+      const resolvedScore = resolveRoomScore();
+      setRoomScore(resolvedScore);
+    }
+
+    return () => setRoomScore(0);
+  }, [diceValues, resolveRoomScore]);
+
+  return roomScore;
 };

@@ -1,4 +1,4 @@
-import useDiceState from "../../context/DiceState";
+import { useDiceContext } from "../../context/DiceContext";
 import { getStyles } from "../../utils/functions/get-styles";
 import style from "./Dots.module.css";
 
@@ -15,7 +15,7 @@ const Dots = () => {
 export default Dots;
 
 const Dot = ({ dotNumber }) => {
-  const { rollCount } = useDiceState();
+  const { rollCount } = useDiceContext();
   return (
     <div
       id={`dot-${dotNumber}`}
