@@ -106,7 +106,7 @@ code {
   }
 }
 
-@media (500px <= width <= 768px) {
+@media (max-width: 768px) {
   body {
     background: url("/public/assets/background/desktop/background_1-800x600.webp") no-repeat center
       center/cover;
