@@ -6,7 +6,8 @@ import { useAudioContext } from "../../context/AudioContext";
 import { useDiceContext } from "../../context/DiceContext";
 
 const Rooms = () => {
-  const { subTotalForBonus, roomStates, dispatchRoomStates } = useGameContext();
+  const { subTotalForBonus, isYahtzeeBonusEligible, roomStates, dispatchRoomStates } =
+    useGameContext();
   const { diceValues, isYahtzee } = useDiceContext();
   const { playLockRoomAudio } = useAudioContext();
 
@@ -48,7 +49,7 @@ const Rooms = () => {
   };
 
   const resolveFullHouseScore = () => {
-    if (isYahtzee && roomStates.yahtzee.isLocked) return 25;
+    if (isYahtzee && isYahtzeeBonusEligible) return 25;
 
     const uniqueDice = getUniqueDice();
     if (uniqueDice.length !== 2) return 0;
@@ -64,8 +65,8 @@ const Rooms = () => {
   };
 
   const resolveStraightScore = (length) => {
-    if (isYahtzee && roomStates.yahtzee.isLocked && length === 4) return 30;
-    if (isYahtzee && roomStates.yahtzee.isLocked && length === 5) return 40;
+    if (isYahtzee && isYahtzeeBonusEligible && length === 4) return 30;
+    if (isYahtzee && isYahtzeeBonusEligible && length === 5) return 40;
 
     const uniqueDice = getUniqueDice().sort();
     if (uniqueDice.length < length) return 0;

@@ -16,11 +16,15 @@ const GameStateProvider = ({ children }) => {
 
   const [isEndGame, setIsEndGame] = useState(false);
 
+  const isYahtzeeBonusEligible =
+    roomStates.yahtzee.isLocked && roomStates.yahtzee.lockedScore === 50;
+
   const updateTotalScore = useCallback(() => {
     let sum = 0;
     for (const room of Object.values(roomStates)) {
       sum += room.lockedScore;
     }
+    sum += roomStates.yahtzee.totalExtraScore;
     setTotalScore(sum);
   }, [roomStates]);
 
@@ -57,10 +61,12 @@ const GameStateProvider = ({ children }) => {
 
   // add extra yahtzee score to yahtzee score
   useEffect(() => {
-    dispatchRoomStates({
-      action: ACTION.ADD_YAHTZEE_BONUS,
-      payload: { extraScore: numberOfExtraYahtzee * 100 },
-    });
+    if (isYahtzeeBonusEligible) {
+      dispatchRoomStates({
+        action: ACTION.ADD_YAHTZEE_BONUS,
+        payload: { numberOfExtraYahtzee },
+      });
+    }
   }, [numberOfExtraYahtzee]);
 
   // update total score
@@ -97,6 +103,7 @@ const GameStateProvider = ({ children }) => {
         dispatchRoomStates,
         totalScore,
         subTotalForBonus,
+        isYahtzeeBonusEligible,
         totalHasUpdated,
         isEndGame,
         setIsEndGame,

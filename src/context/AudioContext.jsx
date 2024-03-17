@@ -6,7 +6,7 @@ import { useGameContext } from "./GameContext";
 const AudioContext = createContext(null);
 
 const AudioProvider = ({ children }) => {
-  const { roomStates } = useGameContext();
+  const { isYahtzeeBonusEligible } = useGameContext();
   const { yahtzeeFxOn } = useGameFX();
 
   const lockDieAudioRef = useRef(null);
@@ -35,8 +35,7 @@ const AudioProvider = ({ children }) => {
 
   useEffect(() => {
     if (yahtzeeFxOn) {
-      const isyahtzeeAudioRef = !roomStates.yahtzee.isLocked;
-      playYahtzeeAudio(isyahtzeeAudioRef ? 0 : 1);
+      playYahtzeeAudio(isYahtzeeBonusEligible ? 1 : 0);
     }
   }, [yahtzeeFxOn]);
 

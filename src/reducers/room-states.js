@@ -15,7 +15,12 @@ export const initialRoomStates = {
   fullHouse: getInitialRoomState("fullHouse", 1),
   smallStraight: getInitialRoomState("smallStraight", 2),
   largeStraight: getInitialRoomState("largeStraight", 2),
-  yahtzee: getInitialRoomState("yahtzee", 2),
+  yahtzee: {
+    ...getInitialRoomState("yahtzee", 2),
+    isLocked: false,
+    numberOfExtraYahtzee: 0,
+    totalExtraScore: 0,
+  },
   chance: getInitialRoomState("chance", 1),
 };
 
@@ -35,19 +40,19 @@ export const roomStatesReducer = (state, { action, payload }) => {
       };
 
       state[payload.roomName] = newRoomState;
+
       return { ...state };
     }
     case ACTION.ADD_YAHTZEE_BONUS: {
-      const score = state.yahtzee.isLocked ? 50 : 0;
-      const newLockedScore = score + payload.extraScore;
-
       const newState = {
         ...state,
         yahtzee: {
           ...state.yahtzee,
-          lockedScore: newLockedScore,
+          ...payload,
+          totalExtraScore: payload.numberOfExtraYahtzee * 100,
         },
       };
+
       return newState;
     }
     case ACTION.RESET_GAME: {
