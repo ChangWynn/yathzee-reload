@@ -2,7 +2,7 @@ const getInitialRoomState = (name, soundFx) => {
   return { name, isLocked: false, lockedScore: 0, soundFx };
 };
 
-export const initialRoomStates = {
+export const initialRoomStates = Object.freeze({
   ones: getInitialRoomState("ones", 0),
   twos: getInitialRoomState("twos", 0),
   threes: getInitialRoomState("threes", 0),
@@ -22,13 +22,13 @@ export const initialRoomStates = {
     totalExtraScore: 0,
   },
   chance: getInitialRoomState("chance", 1),
-};
+});
 
-export const ACTION = {
+export const ACTION = Object.freeze({
   LOCK_ROOM: "LOCK_ROOM",
   ADD_YAHTZEE_BONUS: "ADD_YAHTZEE_BONUS",
   RESET_GAME: "RESET_GAME",
-};
+});
 
 export const roomStatesReducer = (state, { action, payload }) => {
   switch (action) {

@@ -6,7 +6,7 @@ const GameContext = createContext(null);
 
 const GameStateProvider = ({ children }) => {
   const { reInitDice, isYahtzee } = useDiceContext();
-  const [roomStates, dispatchRoomStates] = useReducer(roomStatesReducer, initialRoomStates);
+  const [roomStates, dispatchRoomStates] = useReducer(roomStatesReducer, { ...initialRoomStates });
 
   const [subTotalForBonus, setSubTotalForBonus] = useState(0);
   const [numberOfExtraYahtzee, setNumberOfExtraYahtzee] = useState(0);
@@ -39,10 +39,9 @@ const GameStateProvider = ({ children }) => {
 
   // update subTotalForBonus
   useEffect(() => {
-    const eligible = ["ones", "twos", "threes", "fours", "fives", "sixes"];
-    let sum = 0;
-
     if (subTotalForBonus < 63) {
+      const eligible = ["ones", "twos", "threes", "fours", "fives", "sixes"];
+      let sum = 0;
       for (const [key, value] of Object.entries(roomStates)) {
         if (eligible.includes(key)) {
           sum += value.lockedScore;
@@ -94,6 +93,7 @@ const GameStateProvider = ({ children }) => {
     setIsEndGame(false);
     reInitDice();
     dispatchRoomStates({ action: ACTION.RESET_GAME, payload: {} });
+    setSubTotalForBonus(0);
   };
 
   return (
